@@ -7,6 +7,7 @@ import { Library, LibraryCategory, LibraryData, categoryDisplayNames } from '../
 
 // Import der JSON-Daten
 import libraryDataJson from '../assets/example.json';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALLBIBS');
@@ -51,75 +52,77 @@ export default function Index() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
 
-      {/* Kategorie-Selektor */}
-      <CategorySelector
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        categoryCounts={categoryCounts}
-      />
+        {/* Kategorie-Selektor */}
+        <CategorySelector
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          categoryCounts={categoryCounts}
+        />
 
-      {/* Statistiken */}
-      <View style={styles.statsContainer}>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{currentLibraries.length}</Text>
-          <Text style={styles.statLabel}>Bibliotheken</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{totalFreeSeats}</Text>
-          <Text style={styles.statLabel}>Freie Plätze</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{totalSeats}</Text>
-          <Text style={styles.statLabel}>Gesamt Plätze</Text>
-        </View>
-      </View>
-
-      {/* Bibliotheksliste */}
-      <FlatList
-        data={currentLibraries}
-        renderItem={renderLibraryCard}
-        keyExtractor={(item, index) => `${selectedCategory}-${index}`}
-        style={styles.libraryList}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.listContent}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>
-              Keine Bibliotheken in dieser Kategorie gefunden
-            </Text>
+        {/* Statistiken */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{currentLibraries.length}</Text>
+            <Text style={styles.statLabel}>Bibliotheken</Text>
           </View>
-        }
-      />
-
-      {/* Detail Modal */}
-      <Modal
-        visible={detailModalVisible}
-        animationType="slide"
-        presentationStyle="pageSheet"
-        onRequestClose={closeDetailModal}
-      >
-        <SafeAreaView style={styles.modalContainer}>
-          <View style={styles.modalHeader}>
-            <TouchableOpacity 
-              style={styles.closeButton}
-              onPress={closeDetailModal}
-            >
-              <Text style={styles.closeButtonText}>✕</Text>
-            </TouchableOpacity>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{totalFreeSeats}</Text>
+            <Text style={styles.statLabel}>Freie Plätze</Text>
           </View>
-          {selectedLibrary && (
-            <LibraryDetail 
-              library={selectedLibrary}
-              onClose={closeDetailModal}
-            />
-          )}
-        </SafeAreaView>
-      </Modal>
-    </SafeAreaView>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{totalSeats}</Text>
+            <Text style={styles.statLabel}>Gesamt Plätze</Text>
+          </View>
+        </View>
+
+        {/* Bibliotheksliste */}
+        <FlatList
+          data={currentLibraries}
+          renderItem={renderLibraryCard}
+          keyExtractor={(item, index) => `${selectedCategory}-${index}`}
+          style={styles.libraryList}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>
+                Keine Bibliotheken in dieser Kategorie gefunden
+              </Text>
+            </View>
+          }
+        />
+
+        {/* Detail Modal */}
+        <Modal
+          visible={detailModalVisible}
+          animationType="slide"
+          presentationStyle="pageSheet"
+          onRequestClose={closeDetailModal}
+        >
+          <SafeAreaView style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <TouchableOpacity 
+                style={styles.closeButton}
+                onPress={closeDetailModal}
+              >
+                <Text style={styles.closeButtonText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            {selectedLibrary && (
+              <LibraryDetail 
+                library={selectedLibrary}
+                onClose={closeDetailModal}
+              />
+            )}
+          </SafeAreaView>
+        </Modal>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

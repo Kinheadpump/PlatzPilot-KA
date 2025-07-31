@@ -51,7 +51,21 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   };
 
   return (
-    <View style={styles.container}>      
+    <View style={styles.container}>
+      {/* Invisible overlay to detect outside clicks */}
+      {isDropdownOpen && (
+        <Pressable
+          style={styles.overlay}
+          onPress={() => {
+            Animated.timing(animatedHeight, {
+              toValue: 0,
+              duration: 300,
+              useNativeDriver: false,
+            }).start(() => setIsDropdownOpen(false));
+          }}
+        />
+      )}
+      
       {/* Dropdown Button */}
       <Pressable
         onPress={toggleDropdown}
@@ -115,6 +129,14 @@ const styles = StyleSheet.create({
     position: 'relative',
     zIndex: 9999,
   },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: -1000,
+    right: -1000,
+    bottom: -1000,
+    zIndex: 1,
+  },
 // Dropdown Button Styles
   dropdownButton: {
     flexDirection: 'row',
@@ -151,10 +173,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: '#ffffff',
-    overflow: 'hidden',
     elevation: 10,
     borderTopWidth: 1,
     borderTopColor: '#e0e0e0',
+    zIndex: 2,
   },
   dropdownShadow: {
     shadowColor: '#000',
