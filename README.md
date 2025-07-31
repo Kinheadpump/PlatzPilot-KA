@@ -3,9 +3,9 @@
 
 Lernplatz-Verfügbarkeit & Prognose für Bibliotheken in Karlsruhe.
 
+---
 
-
-**PlatzPilot** ist eine App mit Python-basiertem Backend-System, das:
+**PlatzPilot** ist eine App mit Python-basiertem Backend-System, welche:
 
 - 🔄 regelmäßig die aktuelle Lernplatzbelegung der Bibliotheken abruft
 - 💾 diese Daten effizient in einem Ringbuffer speichert
