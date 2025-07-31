@@ -1,5 +1,7 @@
 
-# 📊 PlatzPilot KA - Lernplatz-Verfügbarkeit & Prognose für Bibliotheken in Karlsruhe
+# 📊 PlatzPilot KA 
+
+Lernplatz-Verfügbarkeit & Prognose für Bibliotheken in Karlsruhe
 
 **PlatzPilot** ist eine App mit Python-basiertem Backend-System, das:
 
