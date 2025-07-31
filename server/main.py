@@ -1,5 +1,3 @@
-"""D:\PycharmProjects\KITStudySpot"""
-
 import logging
 import json
 from tools.log import setup_logger
