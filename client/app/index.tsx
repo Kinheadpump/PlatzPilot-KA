@@ -3,6 +3,7 @@ import { FlatList, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOp
 import CategorySelector from '../components/CategorySelector';
 import LibraryCard from '../components/LibraryCard';
 import LibraryDetail from '../components/LibraryDetail';
+import StatsDisplay from '../components/StatsDisplay';
 import { Library, LibraryCategory, LibraryData, categoryDisplayNames } from '../types/library';
 
 // Import der JSON-Daten
@@ -65,20 +66,11 @@ export default function Index() {
         />
 
         {/* Statistiken */}
-        <View style={styles.statsContainer}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{currentLibraries.length}</Text>
-            <Text style={styles.statLabel}>Bibliotheken</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{totalFreeSeats}</Text>
-            <Text style={styles.statLabel}>Freie Plätze</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{totalSeats}</Text>
-            <Text style={styles.statLabel}>Gesamt Plätze</Text>
-          </View>
-        </View>
+        <StatsDisplay
+          libraryCount={currentLibraries.length}
+          totalFreeSeats={totalFreeSeats}
+          totalSeats={totalSeats}
+        />
 
         {/* Bibliotheksliste */}
         <FlatList
@@ -131,42 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  header: {
-    padding: 20,
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  appTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#f8f9fa',
-    paddingVertical: 16,
-    marginBottom: 8,
-  },
-  statItem: {
-    alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#2196F3',
-  },
-  statLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 4,
-  },
   libraryList: {
     flex: 1,
   },
@@ -207,5 +163,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#333',
     fontWeight: '600',
-  },
+  }
 });
