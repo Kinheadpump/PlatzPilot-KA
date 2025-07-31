@@ -12,7 +12,6 @@ from datetime import datetime
 SEATS_URL = "https://seatfinder.bibliothek.kit.edu/karlsruhe/getdata.php?callback=jQuery37101524490458818586_1753302096731&location%5B0%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B0%5D=seatestimate%2Cmanualcount&after%5B0%5D=-10800seconds&before%5B0%5D=now&limit%5B0%5D=-17&location%5B1%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B1%5D=location&after%5B1%5D=&before%5B1%5D=now&limit%5B1%5D=1&_=1753302096732"
 LOCATION_NUMBER = 22
 FETCH_INTERVAL = 300
-FORECAST_HORIZON = 12
 
 log_file = "log\\seat_tracker.log"
 ring_buffer_save_file = "data"
