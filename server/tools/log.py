@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 def setup_logger(
     name: str = None,
     level: int = logging.INFO,
-    log_file: str = "app.log",
+    logger_dir: str = "log",
     max_bytes: int = 10 * 1024 * 1024,
     backup_count: int = 5,
     fmt: str = "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -49,8 +49,8 @@ def setup_logger(
     ch.setFormatter(logging.Formatter(fmt, datefmt))
     logger.addHandler(ch)
 
-    os.makedirs(log_file.split("\\")[0], exist_ok=True)
-    fh = RotatingFileHandler(log_file, maxBytes=max_bytes, backupCount=backup_count)
+    os.makedirs(logger_dir, exist_ok=True)
+    fh = RotatingFileHandler(os.path.join(logger_dir, "seat_tracker.log"), maxBytes=max_bytes, backupCount=backup_count)
     fh.setLevel(level)
     fh.setFormatter(logging.Formatter(fmt, datefmt))
     logger.addHandler(fh)

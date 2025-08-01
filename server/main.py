@@ -11,12 +11,12 @@ SEATS_URL = "https://seatfinder.bibliothek.kit.edu/karlsruhe/getdata.php?callbac
 LOCATION_NUMBER = 22
 FETCH_INTERVAL = 300
 
-log_file = "log\\seat_tracker.log"
+log_file = "log"
 ring_buffer_save_file = "data"
-json_save_file = "data\\seat_finder_data.json"
+json_save_file = "seat_finder_data.json"
 
 store = RingBufferStore(storage_dir=ring_buffer_save_file)
-logger = setup_logger(name="seat_tracker", level=logging.DEBUG, log_file=log_file)
+logger = setup_logger(name="seat_tracker", level=logging.INFO, logger_dir=log_file)
 
 
 
