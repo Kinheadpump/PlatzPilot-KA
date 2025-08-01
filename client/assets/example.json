@@ -1,80 +1,566 @@
 {
-  "ALLBIBS": [
+  "KITBIBS_A": [
     {
-      "long_name": "Fachbibliothek HKA (FBH)",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#FBH",
-      "building": "A",
-      "level": "1",
+      "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Medienzentrum, 3. OG Altbau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.50",
+      "level": "3",
       "room": null,
-      "geo_coordinates": "49.01576;8.39167",
-      "available_seats": 270,
-      "opening_hours": {
-        "Monday": [],
-        "Tuesday": [],
-        "Wednesday": [],
-        "Thursday": [],
-        "Friday": [],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "Fachbibliothek DHBW Karlsruhe (FBD)",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#FBD",
-      "building": "A",
-      "level": null,
-      "room": null,
-      "geo_coordinates": "49.02721;8.38525",
-      "available_seats": 36,
+      "geo_coordinates": "49.01125;8.41638",
+      "available_seats": 72,
       "opening_hours": {
         "Monday": [
           [
-            "08:00",
-            "20:00"
+            "00:00",
+            "23:59"
           ]
         ],
         "Tuesday": [
           [
-            "08:00",
-            "16:00"
+            "00:00",
+            "23:59"
           ]
         ],
         "Wednesday": [
           [
-            "08:00",
-            "20:00"
+            "00:00",
+            "23:59"
           ]
         ],
         "Thursday": [
           [
-            "08:00",
-            "20:00"
+            "00:00",
+            "23:59"
           ]
         ],
         "Friday": [
           [
-            "08:00",
-            "20:00"
+            "00:00",
+            "23:59"
           ]
         ],
         "Saturday": [
           [
-            "09:00",
-            "13:00"
+            "00:00",
+            "23:59"
           ]
         ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [],
+      "free_seats_currently": 19
+    },
+    {
+      "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Naturwissenschaften, 2. OG Altbau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.50",
+      "level": "2",
+      "room": null,
+      "geo_coordinates": "49.01125;8.41638",
+      "available_seats": 184,
+      "opening_hours": {
+        "Monday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Thursday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Friday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Saturday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [],
+      "free_seats_currently": 38
+    },
+    {
+      "long_name": "KIT-Bibliothek S\u00fcd, Lehrbuchsammlung, EG/1. OG Altbau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.50",
+      "level": "0/1",
+      "room": null,
+      "geo_coordinates": "49.01125;8.41638",
+      "available_seats": 69,
+      "opening_hours": {
+        "Monday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Thursday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Friday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Saturday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [
+        "LBS_0",
+        "LBS_1"
+      ],
+      "free_seats_currently": 14
+    }
+  ],
+  "KITBIBS_N": [
+    {
+      "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Geisteswissenschaften, 3. OG Neubau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.51",
+      "level": "3",
+      "room": null,
+      "geo_coordinates": "49.01100;8.41676",
+      "available_seats": 166,
+      "opening_hours": {
+        "Monday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Thursday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Friday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Saturday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
+    },
+    {
+      "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Technik, 2. OG Neubau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.51",
+      "level": "2",
+      "room": null,
+      "geo_coordinates": "49.01100;8.41676",
+      "available_seats": 186,
+      "opening_hours": {
+        "Monday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Thursday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Friday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Saturday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
+    },
+    {
+      "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Wirtschaftswissenschaften und Informatik, 1. OG Neubau",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
+      "building": "30.51",
+      "level": "1",
+      "room": null,
+      "geo_coordinates": "49.01100;8.41676",
+      "available_seats": 170,
+      "opening_hours": {
+        "Monday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Thursday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Friday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Saturday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ],
+        "Sunday": [
+          [
+            "00:00",
+            "23:59"
+          ]
+        ]
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
+    }
+  ],
+  "INFOKOM": [
+    {
+      "long_name": "InformatiKOM, Lernplatz 3. OG",
+      "url": null,
+      "building": "50.19",
+      "level": "0",
+      "room": null,
+      "geo_coordinates": "49.01126;8.41879",
+      "available_seats": 24,
+      "opening_hours": {
+        "Monday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Saturday": [],
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 4
+    },
+    {
+      "long_name": "InformatiKOM, Lernplatz 2. OG",
+      "url": null,
+      "building": "50.19",
+      "level": "2",
+      "room": null,
+      "geo_coordinates": "49.01126;8.41879",
+      "available_seats": 30,
+      "opening_hours": {
+        "Monday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Saturday": [],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 6
+    },
+    {
+      "long_name": "InformatiKOM, Stillarbeitsraum",
+      "url": null,
+      "building": "50.19",
+      "level": "1",
+      "room": "117",
+      "geo_coordinates": "49.01126;8.41879",
+      "available_seats": 38,
+      "opening_hours": {
+        "Monday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Saturday": [],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
+    },
+    {
+      "long_name": "InformatiKOM, Lernplatz 1. OG",
+      "url": null,
+      "building": "50.19",
+      "level": "1",
+      "room": null,
+      "geo_coordinates": "49.01126;8.41879",
+      "available_seats": 98,
+      "opening_hours": {
+        "Monday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Saturday": [],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 49
+    },
+    {
+      "long_name": "InformatiKOM, Lernplatz EG",
+      "url": null,
+      "building": "50.19",
+      "level": "0",
+      "room": null,
+      "geo_coordinates": "49.01126;8.41879",
+      "available_seats": 48,
+      "opening_hours": {
+        "Monday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "07:00",
+            "22:00"
+          ]
+        ],
+        "Saturday": [],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 14
     }
   ],
   "FBIB": [
@@ -121,10 +607,7 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 0
     },
     {
       "long_name": "Fachbibliothek Physik (FBP)",
@@ -174,13 +657,10 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 23
     },
     {
-      "long_name": "Fakultätsbibliothek Architektur",
+      "long_name": "Fakult\u00e4tsbibliothek Architektur",
       "url": "https://www.arch.kit.edu/einrichtungen/fachbibliothek.php",
       "building": "20.40",
       "level": "1",
@@ -242,10 +722,7 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 11
     },
     {
       "long_name": "Informatikbibliothek",
@@ -290,17 +767,14 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 32
     },
     {
       "long_name": "Fachbibliothek Mathematik",
       "url": "https://www.math.kit.edu/bibliothek/",
       "building": "20.30",
       "level": "-1/0",
-      "room": "0.018, 1.026",
+      "room": "0.018, \u20131.026",
       "geo_coordinates": "49.01126;8.40899",
       "available_seats": 88,
       "opening_hours": {
@@ -338,15 +812,12 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 0
     }
   ],
   "LAFAS": [
     {
-      "long_name": "Lernzentrum am Fasanenschlösschen (LAF)",
+      "long_name": "Lernzentrum am Fasanenschl\u00f6sschen (LAF)",
       "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#LAF",
       "building": "30.28",
       "level": "1/2",
@@ -398,10 +869,7 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 109,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 21
     }
   ],
   "BIBN": [
@@ -468,612 +936,12 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
-    }
-  ],
-  "KITBIBS_A": [
-    {
-      "long_name": "KIT-Bibliothek Süd, Lesesaal Medienzentrum, 3. OG Altbau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.50",
-      "level": "3",
-      "room": null,
-      "geo_coordinates": "49.01125;8.41638",
-      "available_seats": 72,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [],
-      "free_seats_currently": 62,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "KIT-Bibliothek Süd, Lesesaal Naturwissenschaften, 2. OG Altbau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.50",
-      "level": "2",
-      "room": null,
-      "geo_coordinates": "49.01125;8.41638",
-      "available_seats": 184,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [],
-      "free_seats_currently": 135,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "KIT-Bibliothek Süd, Lehrbuchsammlung, EG/1. OG Altbau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.50",
-      "level": "0/1",
-      "room": null,
-      "geo_coordinates": "49.01125;8.41638",
-      "available_seats": 69,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [
-        "LBS_0",
-        "LBS_1"
-      ],
-      "free_seats_currently": 33,
-      "predictions": [
-        0
-      ]
-    }
-  ],
-  "KITBIBS_N": [
-    {
-      "long_name": "KIT-Bibliothek Süd, Lesesaal Geisteswissenschaften, 3. OG Neubau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.51",
-      "level": "3",
-      "room": null,
-      "geo_coordinates": "49.01100;8.41676",
-      "available_seats": 166,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [],
-      "free_seats_currently": 111,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "KIT-Bibliothek Süd, Lesesaal Technik, 2. OG Neubau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.51",
-      "level": "2",
-      "room": null,
-      "geo_coordinates": "49.01100;8.41676",
-      "available_seats": 186,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [],
-      "free_seats_currently": 110,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "KIT-Bibliothek Süd, Lesesaal Wirtschaftswissenschaften und Informatik, 1. OG Neubau",
-      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#BIB-S",
-      "building": "30.51",
-      "level": "1",
-      "room": null,
-      "geo_coordinates": "49.01100;8.41676",
-      "available_seats": 170,
-      "opening_hours": {
-        "Monday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Thursday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Friday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Saturday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ],
-        "Sunday": [
-          [
-            "00:00",
-            "23:59"
-          ]
-        ]
-      },
-      "sub_locations": [],
-      "free_seats_currently": 85,
-      "predictions": [
-        0
-      ]
-    }
-  ],
-  "INFOKOM": [
-    {
-      "long_name": "InformatiKOM, Lernplatz 3. OG",
-      "url": null,
-      "building": "50.19",
-      "level": "0",
-      "room": null,
-      "geo_coordinates": "49.01126;8.41879",
-      "available_seats": 24,
-      "opening_hours": {
-        "Monday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Thursday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Friday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 13,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "InformatiKOM, Lernplatz 2. OG",
-      "url": null,
-      "building": "50.19",
-      "level": "2",
-      "room": null,
-      "geo_coordinates": "49.01126;8.41879",
-      "available_seats": 30,
-      "opening_hours": {
-        "Monday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Thursday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Friday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 18,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "InformatiKOM, Stillarbeitsraum",
-      "url": null,
-      "building": "50.19",
-      "level": "1",
-      "room": "117",
-      "geo_coordinates": "49.01126;8.41879",
-      "available_seats": 38,
-      "opening_hours": {
-        "Monday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Thursday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Friday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 29,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "InformatiKOM, Lernplatz 1. OG",
-      "url": null,
-      "building": "50.19",
-      "level": "1",
-      "room": null,
-      "geo_coordinates": "49.01126;8.41879",
-      "available_seats": 98,
-      "opening_hours": {
-        "Monday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Thursday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Friday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 84,
-      "predictions": [
-        0
-      ]
-    },
-    {
-      "long_name": "InformatiKOM, Lernplatz EG",
-      "url": null,
-      "building": "50.19",
-      "level": "0",
-      "room": null,
-      "geo_coordinates": "49.01126;8.41879",
-      "available_seats": 48,
-      "opening_hours": {
-        "Monday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Tuesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Wednesday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Thursday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Friday": [
-          [
-            "07:00",
-            "22:00"
-          ]
-        ],
-        "Saturday": [],
-        "Sunday": []
-      },
-      "sub_locations": [],
-      "free_seats_currently": 40,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 14
     }
   ],
   "BLBIB": [
     {
-      "long_name": "Badische Landesbibliothek, Hauptgebäude",
+      "long_name": "Badische Landesbibliothek, Hauptgeb\u00e4ude",
       "url": "https://www.blb-karlsruhe.de/",
       "building": null,
       "level": "0/1/2/3",
@@ -1120,10 +988,7 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 198
     },
     {
       "long_name": "Badische Landesbibliothek, Wissenstor",
@@ -1178,10 +1043,79 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 17,
-      "predictions": [
-        0
-      ]
+      "free_seats_currently": 3
+    }
+  ],
+  "ALLBIBS": [
+    {
+      "long_name": "Fachbibliothek HKA (FBH)",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#FBH",
+      "building": "A",
+      "level": "1",
+      "room": null,
+      "geo_coordinates": "49.01576;8.39167",
+      "available_seats": 270,
+      "opening_hours": {
+        "Monday": [],
+        "Tuesday": [],
+        "Wednesday": [],
+        "Thursday": [],
+        "Friday": [],
+        "Saturday": [],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
+    },
+    {
+      "long_name": "Fachbibliothek DHBW Karlsruhe (FBD)",
+      "url": "https://www.bibliothek.kit.edu/lage-anschrift.php#FBD",
+      "building": "A",
+      "level": null,
+      "room": null,
+      "geo_coordinates": "49.02721;8.38525",
+      "available_seats": 36,
+      "opening_hours": {
+        "Monday": [
+          [
+            "08:00",
+            "20:00"
+          ]
+        ],
+        "Tuesday": [
+          [
+            "08:00",
+            "16:00"
+          ]
+        ],
+        "Wednesday": [
+          [
+            "08:00",
+            "20:00"
+          ]
+        ],
+        "Thursday": [
+          [
+            "08:00",
+            "20:00"
+          ]
+        ],
+        "Friday": [
+          [
+            "08:00",
+            "20:00"
+          ]
+        ],
+        "Saturday": [
+          [
+            "09:00",
+            "13:00"
+          ]
+        ],
+        "Sunday": []
+      },
+      "sub_locations": [],
+      "free_seats_currently": 0
     }
   ]
 }
