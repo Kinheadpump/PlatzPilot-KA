@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { FlatList, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import CategorySelector from '../components/CategorySelector';
 import LibraryCard from '../components/LibraryCard';
 import LibraryDetail from '../components/LibraryDetail';
@@ -8,7 +8,6 @@ import { Library, LibraryCategory, LibraryData, categoryDisplayNames } from '../
 
 // Import der JSON-Daten
 import libraryDataJson from '../assets/example.json';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALLBIBS');
@@ -53,11 +52,9 @@ export default function Index() {
   );
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-
-
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <View style={styles.contentContainer}>
         {/* Kategorie-Selektor */}
         <CategorySelector
           selectedCategory={selectedCategory}
@@ -113,8 +110,8 @@ export default function Index() {
             )}
           </SafeAreaView>
         </Modal>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -122,6 +119,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0,
+  },
+  contentContainer: {
+    flex: 1,
   },
   libraryList: {
     flex: 1,

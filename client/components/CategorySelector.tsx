@@ -51,11 +51,25 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      {/* Invisible overlay to detect outside clicks */}
+    <>
+      <View style={styles.container}>
+        {/* Dropdown Button */}
+        <Pressable onPress={toggleDropdown}>
+          <View style={styles.dropdownButton}>
+            <View style={styles.textContainer}>
+              <Text numberOfLines={1} style={styles.categoryText}>
+                {categoryDisplayNames[selectedCategory]}
+              </Text>
+            </View>
+            <Text style={[styles.arrowText, isDropdownOpen && styles.arrowTextOpen]}>▼</Text>
+          </View>
+        </Pressable>
+      </View>
+
+      {/* Backdrop for closing dropdown */}
       {isDropdownOpen && (
         <Pressable
-          style={styles.overlay}
+          style={styles.backdrop}
           onPress={() => {
             Animated.timing(animatedHeight, {
               toValue: 0,
@@ -65,22 +79,8 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           }}
         />
       )}
-      
-      {/* Dropdown Button */}
-      <Pressable
-        onPress={toggleDropdown}
-      >
-        <View style={styles.dropdownButton}>
-          <View style={styles.textContainer}>
-            <Text numberOfLines={1} style={styles.categoryText}>
-              {categoryDisplayNames[selectedCategory]}
-            </Text>
-          </View>
-          <Text style={[styles.arrowText, isDropdownOpen && styles.arrowTextOpen]}>▼</Text>
-        </View>
-      </Pressable>
 
-      {/* Animated Dropdown */}
+      {/* Animated Dropdown - positioned absolutely but outside container */}
       <Animated.View 
         style={[
           styles.dropdownContainer,
@@ -89,8 +89,10 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
         ]}
       >
         <ScrollView 
+          style={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
-          style={styles.scrollView}
+          nestedScrollEnabled={true}
+          scrollEnabled={isDropdownOpen}
         >
           {categories.map((category) => (
             <Pressable
@@ -119,23 +121,21 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           ))}
         </ScrollView>
       </Animated.View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-// Container Style
   container: {
-    position: 'relative',
-    zIndex: 9999,
+    zIndex: 1000,
   },
-  overlay: {
+  backdrop: {
     position: 'absolute',
     top: 0,
-    left: -1000,
-    right: -1000,
-    bottom: -1000,
-    zIndex: 1,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 999,
   },
 // Dropdown Button Styles
   dropdownButton: {
@@ -176,7 +176,8 @@ const styles = StyleSheet.create({
     elevation: 10,
     borderTopWidth: 1,
     borderTopColor: '#e0e0e0',
-    zIndex: 2,
+    overflow: 'hidden',
+    zIndex: 1001,
   },
   dropdownShadow: {
     shadowColor: '#000',
@@ -187,9 +188,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  scrollView: {
+  scrollContainer: {
     flex: 1,
-    
   },
   categoryItem: {
     paddingVertical: 16,
