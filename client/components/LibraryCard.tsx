@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Library } from '../types/library';
+import { LibraryDataService } from '../services/LibraryDataService';
 
 interface LibraryCardProps {
   library: Library;
@@ -8,18 +9,6 @@ interface LibraryCardProps {
 }
 
 const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress }) => {
-  const formatOpeningHours = (day: string[][]) => {
-    if (day.length === 0) return 'Geschlossen';
-    return day.map(hours => `${hours[0]} - ${hours[1]}`).join(', ');
-  };
-
-  const getCurrentDayHours = () => {
-    const today = new Date().getDay();
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const dayName = days[today] as keyof typeof library.opening_hours;
-    return formatOpeningHours(library.opening_hours[dayName]);
-  };
-
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.header}>
@@ -46,7 +35,7 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress }) => {
 
       <View style={styles.infoRow}>
         <Text style={styles.label}>Heute:</Text>
-        <Text style={styles.value}>{getCurrentDayHours()}</Text>
+        <Text style={styles.value}>{LibraryDataService.getCurrentDayHours(library)}</Text>
       </View>
 
       {library.url && (

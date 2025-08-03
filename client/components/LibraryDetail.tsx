@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Library } from '../types/library';
+import { LibraryDataService } from '../services/LibraryDataService';
 
 interface LibraryDetailProps {
   library: Library;
@@ -21,17 +22,10 @@ const LibraryDetail: React.FC<LibraryDetailProps> = ({ library }) => {
 
     return days.map(day => {
       const hours = library.opening_hours[day.key as keyof typeof library.opening_hours];
-      const hoursText = hours.length === 0 
-        ? 'Geschlossen' 
-        : hours.map(h => `${h[0]} - ${h[1]}`).join(', ');
+      const hoursText = LibraryDataService.formatOpeningHours(hours);
       
       return { day: day.label, hours: hoursText };
     });
-  };
-
-  const getOccupancyPercentage = () => {
-    if (library.available_seats === 0) return 0;
-    return Math.round(((library.available_seats - library.free_seats_currently) / library.available_seats) * 100);
   };
 
   return (
@@ -83,7 +77,7 @@ const LibraryDetail: React.FC<LibraryDetailProps> = ({ library }) => {
             <Text style={styles.seatsLabel}>Gesamt</Text>
           </View>
           <View style={styles.seatsInfo}>
-            <Text style={styles.seatsNumber}>{getOccupancyPercentage()}%</Text>
+            <Text style={styles.seatsNumber}>{LibraryDataService.getLibraryOccupancyPercentage(library)}%</Text>
             <Text style={styles.seatsLabel}>Belegt</Text>
           </View>
         </View>
