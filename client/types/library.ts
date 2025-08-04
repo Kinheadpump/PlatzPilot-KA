@@ -36,12 +36,12 @@ export interface LibraryData {
 export type LibraryCategory = keyof LibraryData;
 
 export const categoryDisplayNames: Record<LibraryCategory, string> = {
-  ALLBIBS: "Alle Bibliotheken",
+  ALLBIBS: "Sonstige",
   FBIB: "Fachbibliotheken",
   LAFAS: "Lernzentrum Fasanenschlösschen",
   BIBN: "KIT-Bibliothek Nord",
   KITBIBS_A: "KIT-Bibliothek Süd (Altbau)",
   KITBIBS_N: "KIT-Bibliothek Süd (Neubau)",
   INFOKOM: "InformatiKOM",
-  BLBIB: "Badische Landesbibliothek"
+  BLBIB: "Badische Landesbibliothek",
 };

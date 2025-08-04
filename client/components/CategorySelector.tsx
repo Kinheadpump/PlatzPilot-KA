@@ -15,8 +15,9 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const animatedHeight = useRef(new Animated.Value(0)).current;
-  const categories = Object.keys(categoryDisplayNames) as LibraryCategory[];
-  
+  const categories = (Object.keys(categoryDisplayNames) as LibraryCategory[])
+    .sort((a, b) => categoryDisplayNames[a].localeCompare(categoryDisplayNames[b]));
+
   // Responsive Height basierend auf Bildschirmgröße
   const screenHeight = Dimensions.get('window').height;
   const maxDropdownHeight = Math.min(screenHeight * 0.4, categories.length * 60); // 40% der Bildschirmhöhe oder 60px pro Item
@@ -81,14 +82,14 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       )}
 
       {/* Animated Dropdown - positioned absolutely but outside container */}
-      <Animated.View 
+      <Animated.View
         style={[
           styles.dropdownContainer,
           { height: animatedHeight },
           isDropdownOpen && styles.dropdownShadow
         ]}
       >
-        <ScrollView 
+        <ScrollView
           style={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled={true}
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 999,
   },
-// Dropdown Button Styles
+  // Dropdown Button Styles
   dropdownButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '180deg' }],
   },
 
-// Dropdown Styles (ersetzt Modal)
+  // Dropdown Styles (ersetzt Modal)
   dropdownContainer: {
     position: 'absolute',
     top: 50,
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  
+
 });
 
 export default CategorySelector;

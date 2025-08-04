@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Library } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
 
@@ -9,100 +9,151 @@ interface LibraryCardProps {
 }
 
 const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress }) => {
+  const isLibraryOpen = () => {
+    const now = new Date();
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const currentDay = dayNames[now.getDay()];
+    const currentTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+    const todayHours = library.opening_hours[currentDay as keyof typeof library.opening_hours];
+
+    if (!todayHours || todayHours.length === 0) {
+      return false; // Closed if no hours defined
+    }
+
+    // Check if current time falls within any of the opening periods
+    return todayHours.some(([start, end]) => {
+      return currentTime >= start && currentTime <= end;
+    });
+  };
+
+  const isOpen = isLibraryOpen();
+
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <Pressable
+      style={styles.card}
+      onPress={onPress}
+    >
       <View style={styles.header}>
-        <Text style={styles.title} numberOfLines={2}>
-          {library.long_name}
-        </Text>
-      </View>
-      
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Gebäude:</Text>
-        <Text style={styles.value}>
-          {library.building || 'N/A'} 
-          {library.level && ` - Ebene ${library.level}`}
-          {library.room && ` - Raum ${library.room}`}
-        </Text>
-      </View>
-
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Plätze:</Text>
-        <Text style={styles.value}>
-          {library.free_seats_currently} / {library.available_seats} frei
-        </Text>
+        <View style={styles.leftSection}>
+          <Text style={styles.title} numberOfLines={2}>
+            {library.long_name}
+          </Text>
+          <Text style={styles.subTitle}>
+            {library.level ? `${library.level}. Stock` : 'Ebene: N/A'}
+          </Text>
+        </View>
+        <View style={styles.rightSection}>
+          <Text style={styles.freeSeatsNumber}>
+            {library.free_seats_currently}
+          </Text>
+          <Text style={styles.freeSeatsLabel}>
+            Freie Plätze
+          </Text>
+        </View>
       </View>
 
-      <View style={styles.infoRow}>
-        <Text style={styles.label}>Heute:</Text>
-        <Text style={styles.value}>{LibraryDataService.getCurrentDayHours(library)}</Text>
-      </View>
-
-      {library.url && (
-        <Text style={styles.url} numberOfLines={1}>
-          {library.url}
+      <View style={styles.statusSection}>
+        <View style={styles.statusRow}>
+          <View style={[
+            styles.statusDot,
+            isOpen ? styles.openDot : styles.closedDot
+          ]} />
+          <Text style={
+            isOpen ? styles.openLabel : styles.closedLabel
+          }>
+            {isOpen ? 'Geöffnet' : 'Geschlossen'}
+          </Text>
+        </View>
+        <Text style={styles.hoursText}>
+          {LibraryDataService.getCurrentDayHours(library)}
         </Text>
-      )}
-    </TouchableOpacity>
+      </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
-    borderRadius: 12,
+    borderRadius: 8,
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
     shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: 'flex-start',
-    marginBottom: 12,
+  },
+  leftSection: {
+    flex: 1,
+    marginRight: 12,
+  },
+  rightSection: {
+    alignItems: 'center',
+    minWidth: 80,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
-    color: '#333',
-    flex: 1,
-    marginRight: 8,
   },
-  occupancyIndicator: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    marginTop: 2,
+  subTitle: {
+    fontSize: 14,
+    fontWeight: '300',
+    color: "#747474ff",
   },
-  infoRow: {
+  freeSeatsNumber: {
+    fontSize: 24,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  freeSeatsLabel: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: "#747474ff",
+  },
+  statusSection: {
+    marginTop: 12,
+    paddingTop: 12,
+  },
+  statusRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 6,
+    alignItems: 'center',
+    marginBottom: 4,
   },
-  label: {
+  statusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 6,
+  },
+  openLabel: {
+    color: '#2e7d32',
     fontSize: 14,
+    fontWeight: '600',
+  },
+  closedLabel: {
+    color: '#d32f2f',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  openDot: {
+    backgroundColor: '#2e7d32',
+  },
+  closedDot: {
+    backgroundColor: '#d32f2f',
+  },
+  hoursText: {
+    fontSize: 13,
     color: '#666',
-    fontWeight: '500',
-  },
-  value: {
-    fontSize: 14,
-    color: '#333',
-    flex: 1,
-    textAlign: 'right',
-  },
-  url: {
-    fontSize: 12,
-    color: '#2196F3',
-    marginTop: 8,
-    fontStyle: 'italic',
   },
 });
 
