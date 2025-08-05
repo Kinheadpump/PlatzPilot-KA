@@ -67,7 +67,7 @@ def replace_place_with_dict(data: dict[str, list[str]], place: str, new_entry: d
             places[idx] = new_entry
 
 
-def json_handler(location_dict, number_of_free_seats):
+def json_handler(location_dict, forecasts, number_of_free_seats, is_closed_flag):
     combined = deepcopy(grouping)
 
     counting_locations = 0
@@ -80,6 +80,8 @@ def json_handler(location_dict, number_of_free_seats):
         first_loc_entry.pop("super_location", None)
         first_loc_entry["opening_hours"] = convert_opening_hours(first_loc_entry.get("opening_hours"))
         first_loc_entry["free_seats_currently"] = number_of_free_seats[counting_locations]
+        first_loc_entry["predictions"] = forecasts[counting_locations]
+        first_loc_entry["is_closed"] = is_closed_flag[key]
 
         replace_place_with_dict(combined, key, first_loc_entry)
         counting_locations += 1
