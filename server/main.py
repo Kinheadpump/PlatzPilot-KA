@@ -86,14 +86,15 @@ def main():
             with open(json_save_file, 'w') as f:
                 json.dump(json_to_push, f, ensure_ascii=True, indent=2)
 
-            last_data_update = datetime.strptime(last_seat_count_update, '%Y-%m-%d %H:%M:%S.%f')
+            """last_data_update = datetime.strptime(last_seat_count_update, '%Y-%m-%d %H:%M:%S.%f')
             time_since_update = (datetime.now() - last_data_update).total_seconds()
             wait_time = FETCH_INTERVAL - time_since_update
             wait_time = wait_time if wait_time > 0 else FETCH_INTERVAL
-            logger.debug("sleeping now for %s s", wait_time)
+            logger.debug("sleeping now for %s s", wait_time)"""
 
-            sleep(wait_time)
+            sleep(FETCH_INTERVAL)
 
 
 if __name__ == "__main__":
     main()
+
