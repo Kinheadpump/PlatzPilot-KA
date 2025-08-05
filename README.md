@@ -9,8 +9,8 @@ Lernplatz-Verfügbarkeit & Prognose für Bibliotheken in Karlsruhe.
 
 - 🔄 regelmäßig die aktuelle Lernplatzbelegung der Bibliotheken abruft
 - 💾 diese Daten effizient in einem Ringbuffer speichert
-- 📈 für jedes Gebäude ein Vorhersagemodell trainiert (TODO)
-- 🔮 Vorhersagen über die Lernplatzverfügbarkeit in naher Zukunft generiert (TODO)
+- 📈 für jedes Gebäude ein Vorhersagemodell erstellt
+- 🔮 Vorhersagen über die Lernplatzverfügbarkeit in naher Zukunft generiert
 
 ---
 
