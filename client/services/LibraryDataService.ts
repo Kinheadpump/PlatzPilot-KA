@@ -11,7 +11,11 @@ export class LibraryDataService {
 
     // Get libraries for a specific category
     static getLibrariesByCategory(category: LibraryCategory): Library[] {
-        return this.libraryData[category] || [];
+        if (category === 'ALL') {
+            // Return all libraries from all categories
+            return Object.values(this.libraryData).flat();
+        }
+        return this.libraryData[category as keyof LibraryData] || [];
     }
 
     // Calculate category counts
@@ -19,7 +23,12 @@ export class LibraryDataService {
         const counts = {} as Record<LibraryCategory, number>;
         Object.keys(categoryDisplayNames).forEach(category => {
             const categoryKey = category as LibraryCategory;
-            counts[categoryKey] = this.libraryData[categoryKey]?.length || 0;
+            if (categoryKey === 'ALL') {
+                // Count all libraries from all categories
+                counts[categoryKey] = Object.values(this.libraryData).flat().length;
+            } else {
+                counts[categoryKey] = this.libraryData[categoryKey as keyof LibraryData]?.length || 0;
+            }
         });
         return counts;
     }

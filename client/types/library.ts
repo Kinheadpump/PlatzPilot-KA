@@ -33,9 +33,10 @@ export interface LibraryData {
   BLBIB: Library[];
 }
 
-export type LibraryCategory = keyof LibraryData;
+export type LibraryCategory = keyof LibraryData | 'ALL';
 
 export const categoryDisplayNames: Record<LibraryCategory, string> = {
+  ALL: "Alle Bibliotheken",
   ALLBIBS: "Sonstige",
   FBIB: "Fachbibliotheken",
   LAFAS: "Lernzentrum Fasanenschlösschen",

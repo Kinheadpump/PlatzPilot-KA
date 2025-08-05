@@ -1,17 +1,12 @@
-import { Stack } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, Platform } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import BottomTabBar from '../components/BottomTabBar';
 
 export default function RootLayout() {
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
+      <BottomTabBar />
     </SafeAreaView>
   );
 }

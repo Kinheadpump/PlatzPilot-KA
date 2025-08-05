@@ -6,7 +6,7 @@ import { Library, LibraryCategory } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
 
 export default function Index() {
-  const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('KITBIBS_N');
+  const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALL');
 
   // Get category counts using service
   const categoryCounts = useMemo(() => {
@@ -32,13 +32,6 @@ export default function Index() {
         onCategoryChange={setSelectedCategory}
         categoryCounts={categoryCounts}
       />
-
-      {/* Statistiken */}
-      {/* <StatsDisplay
-        libraryCount={categoryStats.libraryCount}
-        totalFreeSeats={categoryStats.totalFreeSeats}
-        totalSeats={categoryStats.totalSeats}
-      /> */}
 
       {/* Bibliotheksliste */}
       <FlatList
