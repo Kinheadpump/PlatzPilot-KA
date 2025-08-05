@@ -2,10 +2,11 @@ import os
 import json
 import numpy as np
 from datetime import datetime, timedelta
+from math import floor
 
 class RingBufferStore:
     """
-    A ring buffer store using NumPy memmap for fixed-size storage of time series data,
+    A ring buffer ring_buffer using NumPy memmap for fixed-size storage of time series data,
     inferring timestamps implicitly from a fixed start time and interval.
 
     Attributes:
@@ -72,15 +73,14 @@ class RingBufferStore:
                 'start_time': self.start_time.isoformat()
             }, f)
 
-    def append(self, counts: list):
+    def append(self, counts: list, reading_time):
         """
         Append a new record into the ring buffer by storing counts.
         Args:
             counts (list[int]): List of length num_buildings with seat counts.
         """
+        self.pointer = (floor((datetime.strptime(reading_time,"%Y-%m-%d %H:%M:%S.%f")-self.start_time).total_seconds()/300)) % self.capacity
         self.counts[self.pointer, :] = counts
-        # advance pointer
-        self.pointer = (self.pointer + 1) % self.capacity
         self._save_metadata()
         # flush changes
         self.counts.flush()
