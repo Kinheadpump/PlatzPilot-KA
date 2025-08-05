@@ -1,26 +1,37 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import CategorySelector from '../components/CategorySelector';
 import LibraryCard from '../components/LibraryCard';
 import { Library, LibraryCategory } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
+import { FavoritesService } from '../services/FavoritesService';
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALL');
+
+  // Initialize FavoritesService when component mounts
+  useEffect(() => {
+    FavoritesService.initialize();
+  }, []);
+
+  const handleFavoriteChange = (library: Library, isFavorite: boolean) => {
+    // Optional: You could add some feedback here like a toast message
+    console.log(`Library ${library.long_name} ${isFavorite ? 'added to' : 'removed from'} favorites`);
+  };
 
   // Get category counts using service
   const categoryCounts = useMemo(() => {
     return LibraryDataService.getCategoryCounts();
   }, []);
 
-  // Get current libraries and stats using service
+  // Get current libraries using service
   const currentLibraries = LibraryDataService.getLibrariesByCategory(selectedCategory);
-  const categoryStats = LibraryDataService.getCategoryStats(selectedCategory);
 
 
   const renderLibraryCard = ({ item }: { item: Library }) => (
     <LibraryCard
       library={item}
+      onFavoriteChange={handleFavoriteChange}
     />
   );
 
@@ -59,6 +70,7 @@ const styles = StyleSheet.create({
   },
   libraryList: {
     flex: 1,
+    backgroundColor: "#ffffffff"
   },
   listContent: {
     paddingBottom: 20,

@@ -2,13 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Library } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
+import FavoriteButton from './FavoriteButton';
+import { shadows } from '../utils/shadows';
 
 interface LibraryCardProps {
   library: Library;
   onPress?: () => void;
+  onFavoriteChange?: (library: Library, isFavorite: boolean) => void;
 }
 
-const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress }) => {
+const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress, onFavoriteChange }) => {
   const isLibraryOpen = () => {
     const now = new Date();
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -53,21 +56,31 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress }) => {
         </View>
       </View>
 
-      <View style={styles.statusSection}>
-        <View style={styles.statusRow}>
-          <View style={[
-            styles.statusDot,
-            isOpen ? styles.openDot : styles.closedDot
-          ]} />
-          <Text style={
-            isOpen ? styles.openLabel : styles.closedLabel
-          }>
-            {isOpen ? 'Geöffnet' : 'Geschlossen'}
+      <View style={styles.bottomPart}>
+        <View>
+          <View style={styles.statusRow}>
+            <View style={[
+              styles.statusDot,
+              isOpen ? styles.openDot : styles.closedDot
+            ]} />
+            <Text style={
+              isOpen ? styles.openLabel : styles.closedLabel
+            }>
+              {isOpen ? 'Geöffnet' : 'Geschlossen'}
+            </Text>
+          </View>
+          <Text style={styles.hoursText}>
+            {LibraryDataService.getCurrentDayHours(library)}
           </Text>
         </View>
-        <Text style={styles.hoursText}>
-          {LibraryDataService.getCurrentDayHours(library)}
-        </Text>
+        <View>
+          <FavoriteButton
+            library={library}
+            onFavoriteChange={onFavoriteChange}
+            size={32}
+            style={styles.favoriteButtonContainer}
+          />
+        </View>
       </View>
     </Pressable>
   );
@@ -80,13 +93,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    ...shadows.small,
   },
   header: {
     flexDirection: "row",
@@ -100,6 +107,9 @@ const styles = StyleSheet.create({
   rightSection: {
     alignItems: 'center',
     minWidth: 80,
+  },
+  favoriteButtonContainer: {
+    marginBottom: 8,
   },
   title: {
     fontSize: 18,
@@ -119,10 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     color: "#747474ff",
-  },
-  statusSection: {
-    marginTop: 12,
-    paddingTop: 12,
   },
   statusRow: {
     flexDirection: 'row',
@@ -154,6 +160,13 @@ const styles = StyleSheet.create({
   hoursText: {
     fontSize: 13,
     color: '#666',
+  },
+  bottomPart: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'flex-start',
+    marginTop: 12,
+    paddingTop: 12,
   },
 });
 
