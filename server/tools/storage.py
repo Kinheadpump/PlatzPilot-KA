@@ -63,7 +63,7 @@ class RingBufferStore:
         else:
             # initialize pointer and start_time at first run
             self.pointer = 0
-            self.start_time = datetime.utcnow()
+            self.start_time = datetime.now()
             self._save_metadata()
 
     def _save_metadata(self):
