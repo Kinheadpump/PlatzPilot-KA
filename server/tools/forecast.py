@@ -2,6 +2,7 @@ import numpy as np
 import json
 import os
 
+MAX_FORECAST = 12
 
 class HoltWintersOnline:
     """
@@ -67,7 +68,7 @@ class HoltWintersOnline:
 
         self.n += 1
 
-    def forecast(self, steps=12):
+    def forecast(self, steps=MAX_FORECAST):
         """Generate forecast for next steps"""
         forecasts = []
         current_season_idx = self.n % self.season_length
@@ -162,7 +163,7 @@ class ForecastManager:
             model.update(latest_counts[i])
 
             # Generate forecast for this building
-            building_forecast = model.forecast(steps=12)
+            building_forecast = model.forecast(steps=MAX_FORECAST)
             forecast_list.append(building_forecast)
 
             # Persist model state (consider doing this less frequently in production)
