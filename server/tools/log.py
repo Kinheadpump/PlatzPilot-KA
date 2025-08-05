@@ -21,7 +21,7 @@ def setup_logger(
         Name of the logger (use __name__ in modules).
     level : int
         Logging level (e.g. logging.DEBUG, INFO, WARNING).
-    log_file : str
+    logger_dir : str
         Path to the log file.
     max_bytes : int
         Maximum size in bytes before rotating.
@@ -56,3 +56,4 @@ def setup_logger(
     logger.addHandler(fh)
 
     return logger
+
