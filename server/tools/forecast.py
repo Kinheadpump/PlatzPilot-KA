@@ -169,4 +169,4 @@ class ForecastManager:
             # Persist model state (consider doing this less frequently in production)
             self._save_model_state(i)
 
-        return np.array(forecast_list)
+        return np.array(forecast_list).round()
