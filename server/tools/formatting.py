@@ -80,7 +80,7 @@ def json_handler(location_dict, forecasts, number_of_free_seats, is_closed_flag)
         first_loc_entry.pop("super_location", None)
         first_loc_entry["opening_hours"] = convert_opening_hours(first_loc_entry.get("opening_hours"))
         first_loc_entry["free_seats_currently"] = number_of_free_seats[counting_locations]
-        first_loc_entry["predictions"] = forecasts[counting_locations]
+        first_loc_entry["predictions"] = forecasts[counting_locations].tolist()
         first_loc_entry["is_closed"] = is_closed_flag[key]
 
         replace_place_with_dict(combined, key, first_loc_entry)
