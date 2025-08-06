@@ -1,7 +1,6 @@
 import logging
 import json
 from time import sleep
-from datetime import datetime
 from tools.log import setup_logger
 from tools.fetcher import fetch_seats
 from tools.storage import RingBufferStore
@@ -17,12 +16,14 @@ ring_buffer_save_file = "data"
 json_save_file = "seat_finder_data.json"
 forecast_model_dir = "model_states"
 
+max_seats_list = [166, 72, 186, 184, 170, 69, 15, 24, 30, 38, 98, 48, 100, 77, 206, 12, 73, 88, 270, 36, 238, 21]
+
 ring_buffer = RingBufferStore(storage_dir=ring_buffer_save_file)
 logger = setup_logger(name="seat_tracker", level=logging.DEBUG, logger_dir=log_file)
-
 forecast_manager = ForecastManager(
     ring_buffer,
     model_dir=forecast_model_dir,
+    max_seats_list=max_seats_list,
     num_buildings=22,
     season_length=288
 )
@@ -97,4 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
