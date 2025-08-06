@@ -6,27 +6,13 @@ from tools.fetcher import fetch_seats
 from tools.storage import RingBufferStore
 from tools.formatting import json_handler
 from tools.forecast import ForecastManager
+from tools.config import AppConfig
 
-SEATS_URL = "https://seatfinder.bibliothek.kit.edu/karlsruhe/getdata.php?callback=jQuery37101524490458818586_1753302096731&location%5B0%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B0%5D=seatestimate%2Cmanualcount&after%5B0%5D=-10800seconds&before%5B0%5D=now&limit%5B0%5D=-17&location%5B1%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B1%5D=location&after%5B1%5D=&before%5B1%5D=now&limit%5B1%5D=1&_=1753302096732"
-LOCATION_NUMBER = 22
-FETCH_INTERVAL = 300
+config = AppConfig('config.json')
 
-log_file = "log"
-ring_buffer_save_file = "data"
-json_save_file = "seat_finder_data.json"
-forecast_model_dir = "model_states"
-
-max_seats_list = [166, 72, 186, 184, 170, 69, 15, 24, 30, 38, 98, 48, 100, 77, 206, 12, 73, 88, 270, 36, 238, 21]
-
-ring_buffer = RingBufferStore(storage_dir=ring_buffer_save_file)
-logger = setup_logger(name="seat_tracker", level=logging.DEBUG, logger_dir=log_file)
-forecast_manager = ForecastManager(
-    ring_buffer,
-    model_dir=forecast_model_dir,
-    max_seats_list=max_seats_list,
-    num_buildings=22,
-    season_length=288
-)
+ring_buffer = RingBufferStore(storage_dir=config.ring_buffer_config)
+logger = setup_logger(name="seat_tracker", level=logging.DEBUG, logger_dir=config.logger_config)
+forecast_manager = ForecastManager(ring_buffer, **config.forecast_config)
 
 
 def main():
@@ -35,7 +21,7 @@ def main():
     while True:
         fetched_data = None
         try:
-            fetched_data = fetch_seats(SEATS_URL)
+            fetched_data = fetch_seats(config.fetch_url)
             logger.debug("Raw fetched data: %r", fetched_data)
 
         except Exception as e:
@@ -47,10 +33,10 @@ def main():
                 raise TypeError("Expected a list of length 2")
 
             seat_estimate = fetched_data[0].get("seatestimate")
-            if not isinstance(seat_estimate, dict) or len(seat_estimate) != LOCATION_NUMBER:
+            if not isinstance(seat_estimate, dict) or len(seat_estimate) != config.location_number:
                 logger.critical("seatestimate malformed: %r", seat_estimate)
                 raise ValueError("Expected fetched_data[0]['seatestimate'] to be a dictionary of length %s",
-                                 LOCATION_NUMBER)
+                                 config.location_number)
 
             last_seat_count_update = seat_estimate['LSG'][0]['timestamp']['date']
 
@@ -65,35 +51,31 @@ def main():
                     library_is_closed_flag[key] = False
             logger.debug("registered number of free seats: %s", number_of_free_seats_currently)
 
-            if len(number_of_free_seats_currently) != LOCATION_NUMBER:
+            if len(number_of_free_seats_currently) != config.location_number:
                 logger.critical("number_of_free_seats_currently not the expected length")
-                raise ValueError("Expected number_of_free_seats_currently to be a list of length %s", LOCATION_NUMBER)
+                raise ValueError("Expected number_of_free_seats_currently to be a list of length %s",
+                                 config.location_number)
 
             ring_buffer.append(number_of_free_seats_currently, last_seat_count_update)
             logger.info("Appended %d-seat record at buffer pos %d", len(seat_estimate), ring_buffer.pointer)
 
             location = fetched_data[1]['location']
-            if not isinstance(location, dict) or len(location) != LOCATION_NUMBER:
+            if not isinstance(location, dict) or len(location) != config.location_number:
                 logger.critical("location malformed: %r", location)
                 raise ValueError("Expected fetched_data[0]['location'] to be a dictionary of length %s",
-                                 LOCATION_NUMBER)
+                                 config.location_number)
 
             forecasts = forecast_manager.update_and_forecast()
             logger.debug("forecast returned: %s", forecasts)
 
-            json_to_push = json_handler(location, forecasts, number_of_free_seats_currently, library_is_closed_flag)
+            json_to_push = json_handler(location, forecasts, number_of_free_seats_currently, library_is_closed_flag,
+                                        config)
             logger.debug("json_handler returned: %s", json_to_push)
 
-            with open(json_save_file, 'w') as f:
+            with open(config.json_save_file, 'w') as f:
                 json.dump(json_to_push, f, ensure_ascii=True, indent=2)
 
-            """last_data_update = datetime.strptime(last_seat_count_update, '%Y-%m-%d %H:%M:%S.%f')
-            time_since_update = (datetime.now() - last_data_update).total_seconds()
-            wait_time = FETCH_INTERVAL - time_since_update
-            wait_time = wait_time if wait_time > 0 else FETCH_INTERVAL
-            logger.debug("sleeping now for %s s", wait_time)"""
-
-            sleep(FETCH_INTERVAL)
+            sleep(config.fetch_interval)
 
 
 if __name__ == "__main__":
