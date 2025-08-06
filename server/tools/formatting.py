@@ -5,17 +5,6 @@ import logging
 
 logger = logging.getLogger("seat_tracker")
 
-grouping = {
-    "KITBIBS_A": ["LSM", "LSN", "LBS"],
-    "KITBIBS_N": ["LSG", "LST", "LSW"],
-    "INFOKOM": ["L3", "L2", "SAR", "L1", "LEG"],
-    "FBIB": ["FBC", "FBP", "FBA", "FBI", "FBM"],
-    "LAFAS": ["LAF"],
-    "BIBN": ["BIB-N"],
-    "BLBIB": ["BLB", "WIS"],
-    "ALLBIBS": ["FBH", "FBD"]
-}
-
 
 def extract_time_range(interval):
     try:
@@ -67,8 +56,8 @@ def replace_place_with_dict(data: dict[str, list[str]], place: str, new_entry: d
             places[idx] = new_entry
 
 
-def json_handler(location_dict, forecasts, number_of_free_seats, is_closed_flag):
-    combined = deepcopy(grouping)
+def json_handler(location_dict, forecasts, number_of_free_seats, is_closed_flag, config):
+    combined = deepcopy(config.formatting_grouping)
 
     counting_locations = 0
     for key, loc_list in location_dict.items():
