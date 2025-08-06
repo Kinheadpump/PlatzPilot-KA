@@ -1,0 +1,27 @@
+{
+  "library_info": {
+    "number_of_locations": 22,
+    "max_seats_list": [166, 72, 186, 184, 170, 69, 15, 24, 30, 38, 98, 48, 100, 77, 206, 12, 73, 88, 270, 36, 238, 21],
+    "grouping": {
+      "KITBIBS_A": ["LSM", "LSN", "LBS"],
+      "KITBIBS_N": ["LSG", "LST", "LSW"],
+      "INFOKOM": ["L3", "L2", "SAR", "L1", "LEG"],
+      "FBIB": ["FBC", "FBP", "FBA", "FBI", "FBM"],
+      "LAFAS": ["LAF"],
+      "BIBN": ["BIB-N"],
+      "BLBIB": ["BLB", "WIS"],
+      "ALLBIBS": ["FBH", "FBD"]
+    }
+  },
+  "save_files": {
+    "log_dir": "log",
+    "ring_buffer_save_dir": "data",
+    "json_save_file": "seat_finder_data.json",
+    "forecast_model_dir": "model_states"
+  },
+  "other": {
+    "seats_url": "https://seatfinder.bibliothek.kit.edu/karlsruhe/getdata.php?callback=jQuery37101524490458818586_1753302096731&location%5B0%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B0%5D=seatestimate%2Cmanualcount&after%5B0%5D=-10800seconds&before%5B0%5D=now&limit%5B0%5D=-17&location%5B1%5D=LSG%2CLSM%2CLST%2CLSN%2CLSW%2CLBS%2CBIB-N%2CL3%2CL2%2CSAR%2CL1%2CLEG%2CFBC%2CFBP%2CLAF%2CFBA%2CFBI%2CFBM%2CFBH%2CFBD%2CBLB%2CWIS&values%5B1%5D=location&after%5B1%5D=&before%5B1%5D=now&limit%5B1%5D=1&_=1753302096732",
+    "fetch_interval": 300,
+    "max_forecast": 12
+  }
+}
