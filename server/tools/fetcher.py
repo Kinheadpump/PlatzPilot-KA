@@ -5,9 +5,8 @@ from typing import Any, Dict, List, Union
 from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException, HTTPError, Timeout
 
-
-
 logger = logging.getLogger("seat_tracker")
+
 
 class FetchSeatsError(Exception):
     """Raised when fetching or parsing seat‐occupancy data fails."""
