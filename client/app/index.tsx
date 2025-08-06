@@ -5,8 +5,10 @@ import LibraryCard from '../components/LibraryCard';
 import { Library, LibraryCategory } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
 import { FavoritesService } from '../services/FavoritesService';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Index() {
+  const { colors } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALL');
 
   // Initialize FavoritesService when component mounts
@@ -27,6 +29,29 @@ export default function Index() {
   // Get current libraries using service
   const currentLibraries = LibraryDataService.getLibrariesByCategory(selectedCategory);
 
+  const styles = StyleSheet.create({
+    contentContainer: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    libraryList: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    listContent: {
+      paddingBottom: 20,
+    },
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 60,
+    },
+    emptyText: {
+      fontSize: 16,
+      textAlign: 'center',
+    }
+  });
 
   const renderLibraryCard = ({ item }: { item: Library }) => (
     <LibraryCard
@@ -54,7 +79,7 @@ export default function Index() {
         contentContainerStyle={styles.listContent}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>
+            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
               Keine Bibliotheken in dieser Kategorie gefunden
             </Text>
           </View>
@@ -63,27 +88,3 @@ export default function Index() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
-  libraryList: {
-    flex: 1,
-    backgroundColor: "#ffffffff"
-  },
-  listContent: {
-    paddingBottom: 20,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 60,
-  },
-  emptyText: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-  }
-});

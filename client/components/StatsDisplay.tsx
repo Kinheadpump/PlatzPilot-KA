@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DonutChart from './DonutChart';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface StatsDisplayProps {
   libraryCount: number;
@@ -9,6 +10,36 @@ interface StatsDisplayProps {
 }
 
 export default function StatsDisplay({ libraryCount, totalFreeSeats, totalSeats }: StatsDisplayProps) {
+  const { colors } = useTheme();
+
+  const styles = StyleSheet.create({
+    statsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      paddingVertical: 16,
+    },
+    statItem: {
+      alignItems: 'center',
+      padding: 16,
+      borderRadius: 8,
+      justifyContent: 'center',
+    },
+    statNumber: {
+      fontSize: 24,
+      fontWeight: '700',
+      color: colors.primary,
+    },
+    statLabel: {
+      fontSize: 12,
+      color: colors.textSecondary,
+      marginTop: 4,
+    },
+    statItemContent: {
+      marginHorizontal: 16,
+      alignItems: 'center',
+    }
+  });
+
   return (
     <View style={styles.statsContainer}>
       <View style={styles.statItem}>
@@ -29,31 +60,3 @@ export default function StatsDisplay({ libraryCount, totalFreeSeats, totalSeats 
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 16,
-  },
-  statItem: {
-    alignItems: 'center',
-    padding: 16,
-    borderRadius: 8,
-    justifyContent: 'center',
-  },
-  statNumber: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#2196F3',
-  },
-  statLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 4,
-  },
-  statItemContent: {
-    marginHorizontal: 16,
-    alignItems: 'center',
-  }
-});

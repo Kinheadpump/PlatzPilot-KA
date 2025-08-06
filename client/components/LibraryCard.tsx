@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Library } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
 import FavoriteButton from './FavoriteButton';
-import { shadows } from '../utils/shadows';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface LibraryCardProps {
   library: Library;
@@ -12,6 +12,8 @@ interface LibraryCardProps {
 }
 
 const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress, onFavoriteChange }) => {
+  const { colors } = useTheme();
+  
   const isLibraryOpen = () => {
     const now = new Date();
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -31,6 +33,91 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress, onFavoriteC
   };
 
   const isOpen = isLibraryOpen();
+
+  const styles = StyleSheet.create({
+    card: {
+      backgroundColor: colors.surface,
+      borderRadius: 8,
+      padding: 16,
+      marginVertical: 8,
+      marginHorizontal: 16,
+    },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: 'flex-start',
+    },
+    leftSection: {
+      flex: 1,
+      marginRight: 12,
+    },
+    rightSection: {
+      alignItems: 'center',
+      minWidth: 80,
+    },
+    favoriteButtonContainer: {
+      marginBottom: 8,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: colors.text,
+    },
+    subTitle: {
+      fontSize: 14,
+      fontWeight: '300',
+      color: colors.textSecondary,
+    },
+    freeSeatsNumber: {
+      fontSize: 24,
+      fontWeight: '600',
+      textAlign: 'center',
+      color: colors.text,
+    },
+    freeSeatsLabel: {
+      fontSize: 14,
+      textAlign: 'center',
+      color: colors.textSecondary,
+    },
+    statusRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 4,
+    },
+    statusDot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      marginRight: 6,
+    },
+    openLabel: {
+      color: colors.success,
+      fontSize: 14,
+      fontWeight: '600',
+    },
+    closedLabel: {
+      color: colors.error,
+      fontSize: 14,
+      fontWeight: '600',
+    },
+    openDot: {
+      backgroundColor: colors.success,
+    },
+    closedDot: {
+      backgroundColor: colors.error,
+    },
+    hoursText: {
+      fontSize: 13,
+      color: colors.textSecondary,
+    },
+    bottomPart: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: 'flex-start',
+      marginTop: 12,
+      paddingTop: 12,
+    },
+  });
 
   return (
     <Pressable
@@ -85,89 +172,5 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress, onFavoriteC
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    padding: 16,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    ...shadows.small,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: 'flex-start',
-  },
-  leftSection: {
-    flex: 1,
-    marginRight: 12,
-  },
-  rightSection: {
-    alignItems: 'center',
-    minWidth: 80,
-  },
-  favoriteButtonContainer: {
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  subTitle: {
-    fontSize: 14,
-    fontWeight: '300',
-    color: "#747474ff",
-  },
-  freeSeatsNumber: {
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  freeSeatsLabel: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: "#747474ff",
-  },
-  statusRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  statusDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 6,
-  },
-  openLabel: {
-    color: '#2e7d32',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  closedLabel: {
-    color: '#d32f2f',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  openDot: {
-    backgroundColor: '#2e7d32',
-  },
-  closedDot: {
-    backgroundColor: '#d32f2f',
-  },
-  hoursText: {
-    fontSize: 13,
-    color: '#666',
-  },
-  bottomPart: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: 'flex-start',
-    marginTop: 12,
-    paddingTop: 12,
-  },
-});
 
 export default LibraryCard;

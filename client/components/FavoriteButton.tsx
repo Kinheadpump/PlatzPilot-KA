@@ -3,6 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Library } from '../types/library';
 import { FavoritesService } from '../services/FavoritesService';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface FavoriteButtonProps {
   library: Library;
@@ -17,6 +18,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   size = 28, 
   style 
 }) => {
+  const { colors } = useTheme();
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       <Ionicons
         name={isFavorite ? 'heart' : 'heart-outline'}
         size={size}
-        color={isFavorite ? '#ff4757' : '#666'}
+        color={isFavorite ? colors.error : colors.textSecondary}
       />
     </Pressable>
   );

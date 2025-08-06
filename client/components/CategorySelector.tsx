@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Animated, Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { LibraryCategory, categoryDisplayNames } from '../types/library';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface CategorySelectorProps {
   selectedCategory: LibraryCategory;
@@ -13,6 +14,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   onCategoryChange,
   categoryCounts,
 }) => {
+  const { colors } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const animatedHeight = useRef(new Animated.Value(0)).current;
   const categories = (Object.keys(categoryDisplayNames) as LibraryCategory[])
@@ -50,6 +52,100 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       useNativeDriver: false,
     }).start(() => setIsDropdownOpen(false));
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      zIndex: 1000,
+    },
+    backdrop: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 999,
+    },
+    // Dropdown Button Styles
+    dropdownButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      position: 'relative',
+      backgroundColor: colors.background,
+      height: 50,
+      paddingHorizontal: 16,
+    },
+    textContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    categoryText: {
+      textAlign: 'center',
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: colors.text,
+    },
+    arrowText: {
+      right: 0,
+      fontSize: 16,
+      color: colors.text,
+    },
+    arrowTextOpen: {
+      transform: [{ rotate: '180deg' }],
+    },
+    // Dropdown Styles (ersetzt Modal)
+    dropdownContainer: {
+      position: 'absolute',
+      top: 50,
+      left: 0,
+      right: 0,
+      backgroundColor: colors.surface,
+      elevation: 10,
+      overflow: 'hidden',
+      zIndex: 1001,
+    },
+    dropdownShadow: {
+      shadowColor: colors.shadow,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+    },
+    scrollContainer: {
+      flex: 1,
+    },
+    categoryItem: {
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+    },
+    selectedCategoryItem: {
+      backgroundColor: colors.border,
+    },
+    categoryItemContent: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    categoryItemText: {
+      fontSize: 16,
+      color: colors.text,
+      flex: 1,
+    },
+    selectedCategoryText: {
+      fontWeight: 'bold',
+      color: colors.text,
+    },
+    checkmark: {
+      fontSize: 18,
+      color: colors.primary,
+      marginLeft: 10,
+    },
+  });
 
   return (
     <>
@@ -125,101 +221,5 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    zIndex: 1000,
-  },
-  backdrop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 999,
-  },
-  // Dropdown Button Styles
-  dropdownButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    position: 'relative',
-
-    backgroundColor: '#ffffff',
-    height: 50,
-    paddingHorizontal: 16,
-  },
-  textContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  categoryText: {
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  arrowText: {
-    right: 0,
-    fontSize: 16,
-  },
-  arrowTextOpen: {
-    transform: [{ rotate: '180deg' }],
-  },
-
-  // Dropdown Styles (ersetzt Modal)
-  dropdownContainer: {
-    position: 'absolute',
-    top: 50,
-    left: 0,
-    right: 0,
-    backgroundColor: '#ffffff',
-    elevation: 10,
-    overflow: 'hidden',
-    zIndex: 1001,
-  },
-  dropdownShadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  categoryItem: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  selectedCategoryItem: {
-    backgroundColor: '#d6d6d6ff',
-  },
-  categoryItemContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  categoryItemText: {
-    fontSize: 16,
-    color: '#333333',
-    flex: 1,
-  },
-  selectedCategoryText: {
-    fontWeight: 'bold',
-    color: '#1d1d1dff',
-  },
-  checkmark: {
-    fontSize: 18,
-    color: '#007AFF',
-    marginLeft: 10,
-  },
-
-
-});
 
 export default CategorySelector;

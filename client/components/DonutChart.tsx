@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface DonutChartProps {
   freeSeats: number;
@@ -15,6 +16,7 @@ export default function DonutChart({
   size = 100, 
   strokeWidth = 8 
 }: DonutChartProps) {
+  const { colors } = useTheme();
   const occupiedSeats = totalSeats - freeSeats;
   const freePercentage = totalSeats > 0 ? (freeSeats / totalSeats) * 100 : 0;
   const occupiedPercentage = totalSeats > 0 ? (occupiedSeats / totalSeats) * 100 : 0;
@@ -26,6 +28,31 @@ export default function DonutChart({
   const occupiedOffset = (freePercentage / 100) * circumference;
   const occupiedStrokeDasharray = `${(occupiedPercentage / 100) * circumference} ${circumference}`;
 
+  const styles = StyleSheet.create({
+    chartContainer: {
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chart: {
+      transform: [{ rotate: '0deg' }],
+    },
+    chartCenter: {
+      position: 'absolute',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chartPercentage: {
+      fontSize: 18,
+      fontWeight: '700',
+      color: colors.primary,
+    },
+    chartLabel: {
+      fontSize: 10,
+      color: colors.textSecondary,
+    },
+  });
+
   return (
     <View style={styles.chartContainer}>
       <Svg width={size} height={size} style={styles.chart}>
@@ -34,7 +61,7 @@ export default function DonutChart({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#f0f0f0"
+          stroke={colors.border}
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -43,7 +70,7 @@ export default function DonutChart({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#2196F3"
+          stroke={colors.primary}
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeDasharray={freeStrokeDasharray}
@@ -54,7 +81,7 @@ export default function DonutChart({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#ff0000ff"
+          stroke={colors.error}
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeDasharray={occupiedStrokeDasharray}
@@ -69,28 +96,3 @@ export default function DonutChart({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  chartContainer: {
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chart: {
-    transform: [{ rotate: '0deg' }],
-  },
-  chartCenter: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chartPercentage: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#2196F3',
-  },
-  chartLabel: {
-    fontSize: 10,
-    color: '#666',
-  },
-});

@@ -31,7 +31,36 @@ export const createShadow = (
   }
 };
 
-// Predefined shadow styles
+// Theme-aware shadow function
+export const createThemedShadow = (
+  elevation: number = 3,
+  isDarkMode: boolean = false,
+  shadowOpacity: number = 0.1,
+  shadowRadius: number = 5
+): ShadowStyle => {
+  // In dark mode, use white shadows with lower opacity for subtle effect
+  // In light mode, use black shadows
+  const shadowColor = isDarkMode ? '#ffffff' : '#000000';
+  const adjustedOpacity = isDarkMode ? shadowOpacity * 0.3 : shadowOpacity;
+  
+  if (Platform.OS === 'ios') {
+    return {
+      shadowColor,
+      shadowOffset: {
+        width: 0,
+        height: Math.ceil(elevation / 2),
+      },
+      shadowOpacity: adjustedOpacity,
+      shadowRadius,
+    };
+  } else {
+    return {
+      elevation,
+    };
+  }
+};
+
+// Predefined shadow styles (kept for backward compatibility)
 export const shadows = {
   small: createShadow(2, '#000', 0.1, 3),
   medium: createShadow(4, '#000', 0.1, 5),

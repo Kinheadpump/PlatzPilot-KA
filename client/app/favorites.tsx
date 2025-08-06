@@ -4,8 +4,10 @@ import { useFocusEffect } from 'expo-router';
 import LibraryCard from '../components/LibraryCard';
 import { Library } from '../types/library';
 import { FavoritesService } from '../services/FavoritesService';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Favorites() {
+  const { colors } = useTheme();
   const [favorites, setFavorites] = useState<Library[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -45,6 +47,55 @@ export default function Favorites() {
     />
   );
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+    },
+    headerContainer: {
+      backgroundColor: colors.background,
+      height: 50,
+      paddingHorizontal: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    title: {
+      textAlign: 'center',
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: colors.text,
+    },
+    subtitle: {
+      fontSize: 16,
+      color: colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    hint: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      textAlign: 'center',
+      fontStyle: 'italic',
+    },
+    count: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      fontWeight: '500',
+    },
+    libraryList: {
+      flex: 1,
+    },
+    listContent: {
+      paddingBottom: 20,
+    },
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -71,60 +122,12 @@ export default function Favorites() {
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={handleRefresh}
-              colors={['#000000ff']}
-              tintColor={'#000000ff'}
+              colors={[colors.primary]}
+              tintColor={colors.primary}
             />
           }
         />
       )}
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  headerContainer: {
-    backgroundColor: '#ffffff',
-    height: 50,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  hint: {
-    fontSize: 14,
-    color: '#999',
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
-  count: {
-    fontSize: 14,
-    color: '#666',
-    fontWeight: '500',
-  },
-  libraryList: {
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: 20,
-  },
-});
+};

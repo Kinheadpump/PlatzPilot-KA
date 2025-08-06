@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Library } from '../types/library';
 import { LibraryDataService } from '../services/LibraryDataService';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface LibraryDetailProps {
   library: Library;
@@ -9,6 +10,8 @@ interface LibraryDetailProps {
 }
 
 const LibraryDetail: React.FC<LibraryDetailProps> = ({ library }) => {
+  const { colors } = useTheme();
+  
   const formatOpeningHours = () => {
     const days = [
       { key: 'Monday', label: 'Montag' },
@@ -27,6 +30,96 @@ const LibraryDetail: React.FC<LibraryDetailProps> = ({ library }) => {
       return { day: day.label, hours: hoursText };
     });
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    header: {
+      padding: 20,
+      backgroundColor: colors.primary,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: '600',
+      color: '#ffffff',
+      marginBottom: 8,
+    },
+    url: {
+      fontSize: 14,
+      color: '#e3f2fd',
+    },
+    section: {
+      padding: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: colors.text,
+      marginBottom: 12,
+    },
+    infoGrid: {
+      gap: 8,
+    },
+    infoItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    infoLabel: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      fontWeight: '500',
+    },
+    infoValue: {
+      fontSize: 14,
+      color: colors.text,
+    },
+    seatsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      padding: 20,
+    },
+    seatsInfo: {
+      alignItems: 'center',
+    },
+    seatsNumber: {
+      fontSize: 24,
+      fontWeight: '700',
+      color: colors.primary,
+    },
+    seatsLabel: {
+      fontSize: 12,
+      color: colors.textSecondary,
+      marginTop: 4,
+    },
+    openingHoursRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 8,
+    },
+    dayLabel: {
+      fontSize: 14,
+      fontWeight: '500',
+      color: colors.textSecondary,
+      width: 80,
+    },
+    hoursText: {
+      fontSize: 14,
+      color: colors.text,
+      flex: 1,
+      textAlign: 'right',
+    },
+    subLocation: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      marginBottom: 4,
+    },
+  });
 
   return (
     <ScrollView style={styles.container}>
@@ -104,95 +197,5 @@ const LibraryDetail: React.FC<LibraryDetailProps> = ({ library }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  header: {
-    padding: 20,
-    backgroundColor: '#2196F3',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#ffffff',
-    marginBottom: 8,
-  },
-  url: {
-    fontSize: 14,
-    color: '#e3f2fd',
-  },
-  section: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 12,
-  },
-  infoGrid: {
-    gap: 8,
-  },
-  infoItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  infoLabel: {
-    fontSize: 14,
-    color: '#666',
-    fontWeight: '500',
-  },
-  infoValue: {
-    fontSize: 14,
-    color: '#333',
-  },
-  seatsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 12,
-    padding: 20,
-  },
-  seatsInfo: {
-    alignItems: 'center',
-  },
-  seatsNumber: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#2196F3',
-  },
-  seatsLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 4,
-  },
-  openingHoursRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-  dayLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#666',
-    width: 80,
-  },
-  hoursText: {
-    fontSize: 14,
-    color: '#333',
-    flex: 1,
-    textAlign: 'right',
-  },
-  subLocation: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 4,
-  },
-});
 
 export default LibraryDetail;
