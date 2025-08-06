@@ -2,8 +2,6 @@ import numpy as np
 import json
 import os
 
-MAX_FORECAST = 12
-
 
 class HoltWintersOnline:
     """
@@ -31,6 +29,7 @@ class HoltWintersOnline:
         self.trend = 0.0
         self.seasonal = np.zeros(season_length)
         self.n = 0
+
 
     def initialize(self, y):
         """Initialize model with historical data (at least two seasons)"""
@@ -109,12 +108,13 @@ class ForecastManager:
         and handles model persistence.
         """
 
-    def __init__(self, ring_buffer, model_dir, max_seats_list, num_buildings=22, season_length=288):
+    def __init__(self, ring_buffer, model_dir, max_seats_list, max_forecast=12, num_buildings=22, season_length=288):
         self.ring_buffer = ring_buffer
         self.model_dir = model_dir
         self.num_buildings = num_buildings
         self.season_length = season_length
         self.max_seats_list = max_seats_list  # List of max seats per library
+        self.max_forecast = max_forecast
 
         # Create models with individual max_seats
         self.models = [
@@ -157,13 +157,11 @@ class ForecastManager:
                     model.seasonal = np.zeros(self.season_length)
                     model.n = len(counts)
 
-
     def _save_model_state(self, building_idx):
         """Save model state to disk"""
         state = self.models[building_idx].get_state()
         with open(self.state_files[building_idx], 'w') as f:
             json.dump(state, f)
-
 
     def update_and_forecast(self):
         """Update models with latest data and generate forecast_list"""
@@ -178,7 +176,7 @@ class ForecastManager:
             model.update(latest_counts[i])
 
             # Generate forecast for this building
-            building_forecast = model.forecast(steps=MAX_FORECAST)
+            building_forecast = model.forecast(steps=self.max_forecast)
             forecast_list.append(building_forecast)
 
             # Persist model state (consider doing this less frequently in production)
