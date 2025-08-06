@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import LibraryCard from '../components/LibraryCard';
-import { Library } from '../types/library';
-import { FavoritesService } from '../services/FavoritesService';
-import { useTheme } from '../contexts/ThemeContext';
+import LibraryCard from '../../components/LibraryCard';
+import { Library } from '../../types/library';
+import { FavoritesService } from '../../services/FavoritesService';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Favorites() {
   const { colors } = useTheme();

@@ -1,11 +1,12 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import CategorySelector from '../components/CategorySelector';
-import LibraryCard from '../components/LibraryCard';
-import { Library, LibraryCategory } from '../types/library';
-import { LibraryDataService } from '../services/LibraryDataService';
-import { FavoritesService } from '../services/FavoritesService';
-import { useTheme } from '../contexts/ThemeContext';
+import { router } from 'expo-router';
+import CategorySelector from '../../components/CategorySelector';
+import LibraryCard from '../../components/LibraryCard';
+import { Library, LibraryCategory } from '../../types/library';
+import { LibraryDataService } from '../../services/LibraryDataService';
+import { FavoritesService } from '../../services/FavoritesService';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Index() {
   const { colors } = useTheme();
@@ -19,6 +20,15 @@ export default function Index() {
   const handleFavoriteChange = (library: Library, isFavorite: boolean) => {
     // Optional: You could add some feedback here like a toast message
     console.log(`Library ${library.long_name} ${isFavorite ? 'added to' : 'removed from'} favorites`);
+  };
+
+  const handleLibraryPress = (library: Library) => {
+    // Find the index of this library in the all libraries array
+    const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
+    const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
+    console.log('Navigating to library:', library.long_name);
+    console.log('Library index:', libraryIndex);
+    router.push(`/library/${libraryIndex}` as any);
   };
 
   // Get category counts using service
@@ -56,6 +66,7 @@ export default function Index() {
   const renderLibraryCard = ({ item }: { item: Library }) => (
     <LibraryCard
       library={item}
+      onPress={() => handleLibraryPress(item)}
       onFavoriteChange={handleFavoriteChange}
     />
   );
