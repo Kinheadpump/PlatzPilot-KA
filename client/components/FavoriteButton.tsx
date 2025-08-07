@@ -27,7 +27,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       setIsFavorite(favoriteStatus);
     };
     checkFavoriteStatus();
-  }, [library]);
+
+    // Listen for favorites changes
+    const unsubscribe = FavoritesService.addChangeListener(() => {
+      checkFavoriteStatus();
+    });
+
+    return unsubscribe;
+  }, [library, library.long_name]); // Added library.long_name as dependency to ensure updates
 
   const handleFavoritePress = async () => {
     try {

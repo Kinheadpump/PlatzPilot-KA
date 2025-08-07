@@ -19,7 +19,8 @@ export interface Library {
   opening_hours: OpeningHours;
   sub_locations: string[];
   free_seats_currently: number;
-  //predictions: number[];
+  predictions: number[];
+  is_closed: boolean;
 }
 
 export interface LibraryData {

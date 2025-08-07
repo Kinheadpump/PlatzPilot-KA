@@ -24,11 +24,6 @@ export default function Index() {
     FavoritesService.initialize();
   }, []);
 
-  const handleFavoriteChange = (library: Library, isFavorite: boolean) => {
-    // Optional: You could add some feedback here like a toast message
-    console.log(`Library ${library.long_name} ${isFavorite ? 'added to' : 'removed from'} favorites`);
-  };
-
   const handleLibraryPress = (library: Library) => {
     // Find the index of this library in the all libraries array
     const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
@@ -74,7 +69,6 @@ export default function Index() {
     <LibraryCard
       library={item}
       onPress={() => handleLibraryPress(item)}
-      onFavoriteChange={handleFavoriteChange}
     />
   );
 

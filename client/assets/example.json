@@ -53,7 +53,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 19
+      "free_seats_currently": 10,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Naturwissenschaften, 2. OG Altbau",
@@ -108,7 +123,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 38
+      "free_seats_currently": 10,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "KIT-Bibliothek S\u00fcd, Lehrbuchsammlung, EG/1. OG Altbau",
@@ -166,7 +196,22 @@
         "LBS_0",
         "LBS_1"
       ],
-      "free_seats_currently": 14
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "KITBIBS_N": [
@@ -223,7 +268,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Technik, 2. OG Neubau",
@@ -278,7 +338,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 1,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "KIT-Bibliothek S\u00fcd, Lesesaal Wirtschaftswissenschaften und Informatik, 1. OG Neubau",
@@ -333,7 +408,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "INFOKOM": [
@@ -380,7 +470,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 4
+      "free_seats_currently": 2,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "InformatiKOM, Lernplatz 2. OG",
@@ -425,7 +530,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 6
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "InformatiKOM, Stillarbeitsraum",
@@ -470,7 +590,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "InformatiKOM, Lernplatz 1. OG",
@@ -515,7 +650,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 49
+      "free_seats_currently": 50,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "InformatiKOM, Lernplatz EG",
@@ -560,7 +710,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 14
+      "free_seats_currently": 6,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "FBIB": [
@@ -607,7 +772,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": true
     },
     {
       "long_name": "Fachbibliothek Physik (FBP)",
@@ -657,7 +837,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 23
+      "free_seats_currently": 16,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "Fakult\u00e4tsbibliothek Architektur",
@@ -722,7 +917,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 11
+      "free_seats_currently": 10,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "Informatikbibliothek",
@@ -767,7 +977,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 32
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": true
     },
     {
       "long_name": "Fachbibliothek Mathematik",
@@ -812,7 +1037,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 4,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "LAFAS": [
@@ -823,7 +1063,7 @@
       "level": "1/2",
       "room": null,
       "geo_coordinates": "49.01277;8.41221",
-      "available_seats": 116,
+      "available_seats": 206,
       "opening_hours": {
         "Monday": [
           [
@@ -869,7 +1109,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 21
+      "free_seats_currently": 122,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "BIBN": [
@@ -936,7 +1191,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 14
+      "free_seats_currently": 13,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "BLBIB": [
@@ -988,7 +1258,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 198
+      "free_seats_currently": 182,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     },
     {
       "long_name": "Badische Landesbibliothek, Wissenstor",
@@ -1043,7 +1328,22 @@
         ]
       },
       "sub_locations": [],
-      "free_seats_currently": 3
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": false
     }
   ],
   "ALLBIBS": [
@@ -1065,7 +1365,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": true
     },
     {
       "long_name": "Fachbibliothek DHBW Karlsruhe (FBD)",
@@ -1115,7 +1430,22 @@
         "Sunday": []
       },
       "sub_locations": [],
-      "free_seats_currently": 0
+      "free_seats_currently": 0,
+      "predictions": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "is_closed": true
     }
   ]
 }

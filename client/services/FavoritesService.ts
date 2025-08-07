@@ -3,9 +3,25 @@ import { Library } from '../types/library';
 
 const FAVORITES_STORAGE_KEY = 'PlatzPilot_Favorites';
 
+type FavoritesChangeListener = () => void;
+
 export class FavoritesService {
   private static favorites: Library[] = [];
   private static isInitialized = false;
+  private static listeners: FavoritesChangeListener[] = [];
+
+  // Add a listener for favorites changes
+  static addChangeListener(listener: FavoritesChangeListener): () => void {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  // Notify all listeners of changes
+  private static notifyListeners(): void {
+    this.listeners.forEach(listener => listener());
+  }
 
   // Initialize the service by loading favorites from storage
   static async initialize(): Promise<void> {
@@ -43,6 +59,7 @@ export class FavoritesService {
     if (!await this.isFavorite(library)) {
       this.favorites.push(library);
       await this.saveFavorites();
+      this.notifyListeners();
     }
   }
 
@@ -52,6 +69,7 @@ export class FavoritesService {
     
     this.favorites = this.favorites.filter(fav => !this.isSameLibrary(fav, library));
     await this.saveFavorites();
+    this.notifyListeners();
   }
 
   // Toggle favorite status of a library
@@ -94,5 +112,6 @@ export class FavoritesService {
     await this.initialize();
     this.favorites = [];
     await this.saveFavorites();
+    this.notifyListeners();
   }
 }

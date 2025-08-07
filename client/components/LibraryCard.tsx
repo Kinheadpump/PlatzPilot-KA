@@ -22,7 +22,7 @@ const LibraryCard: React.FC<LibraryCardProps> = ({ library, onPress, onFavoriteC
 
     const todayHours = library.opening_hours[currentDay as keyof typeof library.opening_hours];
 
-    if (!todayHours || todayHours.length === 0) {
+    if (!todayHours || todayHours.length === 0 || library.is_closed) {
       return false; // Closed if no hours defined
     }
 
