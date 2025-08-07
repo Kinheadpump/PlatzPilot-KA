@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, RefreshControl, Platform } from 'react-native';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, router } from 'expo-router';
 import LibraryCard from '../../components/LibraryCard';
 import { Library } from '../../types/library';
 import { FavoritesService } from '../../services/FavoritesService';
+import { LibraryDataService } from '../../services/LibraryDataService';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -40,6 +41,15 @@ export default function Favorites() {
     }
   };
 
+  const handleLibraryPress = (library: Library) => {
+    // Find the index of this library in the all libraries array
+    const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
+    const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
+    console.log('Navigating to library:', library.long_name);
+    console.log('Library index:', libraryIndex);
+    router.push(`/library/${libraryIndex}` as any);
+  };
+
   // Load favorites when the screen comes into focus
   useFocusEffect(
     useCallback(() => {
@@ -50,6 +60,7 @@ export default function Favorites() {
   const renderLibraryCard = ({ item }: { item: Library }) => (
     <LibraryCard
       library={item}
+      onPress={() => handleLibraryPress(item)}
       onFavoriteChange={handleFavoriteChange}
     />
   );
