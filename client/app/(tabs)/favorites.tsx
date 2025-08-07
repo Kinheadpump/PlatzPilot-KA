@@ -1,15 +1,22 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, FlatList, RefreshControl, Platform } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import LibraryCard from '../../components/LibraryCard';
 import { Library } from '../../types/library';
 import { FavoritesService } from '../../services/FavoritesService';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Favorites() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const [favorites, setFavorites] = useState<Library[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Calculate bottom padding based on platform and safe area
+  const tabBarHeight = Platform.OS === 'ios' ? 50 : 60;
+  const bottomPadding = Platform.OS === 'ios' ? insets.bottom : 8;
+  const totalTabBarHeight = tabBarHeight + bottomPadding;
 
   const loadFavorites = async () => {
     try {
@@ -92,7 +99,7 @@ export default function Favorites() {
       flex: 1,
     },
     listContent: {
-      paddingBottom: 20,
+      paddingBottom: totalTabBarHeight + 20, // Add space for tab bar + extra padding
     },
   });
 

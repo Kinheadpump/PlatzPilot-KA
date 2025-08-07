@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Platform } from 'react-native';
 import { router } from 'expo-router';
 import CategorySelector from '../../components/CategorySelector';
 import LibraryCard from '../../components/LibraryCard';
@@ -7,10 +7,17 @@ import { Library, LibraryCategory } from '../../types/library';
 import { LibraryDataService } from '../../services/LibraryDataService';
 import { FavoritesService } from '../../services/FavoritesService';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Index() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALL');
+
+  // Calculate bottom padding based on platform and safe area
+  const tabBarHeight = Platform.OS === 'ios' ? 50 : 60;
+  const bottomPadding = Platform.OS === 'ios' ? insets.bottom : 8;
+  const totalTabBarHeight = tabBarHeight + bottomPadding;
 
   // Initialize FavoritesService when component mounts
   useEffect(() => {
@@ -49,7 +56,7 @@ export default function Index() {
       backgroundColor: colors.background,
     },
     listContent: {
-      paddingBottom: 20,
+      paddingBottom: totalTabBarHeight + 20, // Add space for tab bar + extra padding
     },
     emptyContainer: {
       flex: 1,

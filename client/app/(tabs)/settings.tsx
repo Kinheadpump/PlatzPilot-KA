@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme, ThemeMode } from '../../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Settings() {
   const { colors, themeMode, setThemeMode } = useTheme();
+  const insets = useSafeAreaInsets();
+
+  // Calculate bottom padding based on platform and safe area
+  const tabBarHeight = Platform.OS === 'ios' ? 50 : 60;
+  const bottomPadding = Platform.OS === 'ios' ? insets.bottom : 8;
+  const totalTabBarHeight = tabBarHeight + bottomPadding;
 
   const themeOptions: { mode: ThemeMode; label: string; icon: string; description: string }[] = [
     {
@@ -121,7 +128,11 @@ export default function Settings() {
         <Text style={styles.title}>Einstellungen</Text>
       </View>
       
-      <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        style={styles.scrollContent} 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: totalTabBarHeight + 20 }}
+      >
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Design</Text>
           {themeOptions.map((option) => (

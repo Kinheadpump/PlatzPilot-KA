@@ -4,6 +4,7 @@ import { useLocalSearchParams, router } from 'expo-router';
 import { useTheme } from '../../contexts/ThemeContext';
 import { LibraryDataService } from '../../services/LibraryDataService';
 import { Library } from '../../types/library';
+import MapView from 'react-native-maps';
 
 export default function LibraryDetail() {
   const { colors } = useTheme();

@@ -1,8 +1,9 @@
-import { SafeAreaView, StatusBar, StyleSheet, Platform } from 'react-native';
+import { StatusBar, StyleSheet, Platform } from 'react-native';
 import React from 'react';
 import { Stack } from 'expo-router';
 import BottomTabBar from '../components/BottomTabBar';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function RootLayoutContent() {
   const { colors } = useTheme();
@@ -11,12 +12,11 @@ function RootLayoutContent() {
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0,
     },
   });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <StatusBar barStyle={colors.statusBar} backgroundColor={colors.background} />
       <Stack
         screenOptions={{
@@ -43,8 +43,10 @@ function RootLayoutContent() {
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <RootLayoutContent />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <RootLayoutContent />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
