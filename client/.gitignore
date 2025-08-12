@@ -39,3 +39,5 @@ yarn-error.*
 app-example
 app/(tabs)/sandbox.tsx
 assets/example.json
+
+android/
