@@ -10,7 +10,8 @@ export default function BottomTabBar() {
 
   // Calculate appropriate height and padding for both platforms
   const tabBarHeight = Platform.OS === 'ios' ? 50 : 60;
-  const bottomPadding = Platform.OS === 'ios' ? insets.bottom : 8;
+  // Use actual bottom inset for Android to avoid overlap with navigation bar
+  const bottomPadding = Platform.OS === 'ios' ? insets.bottom : Math.max(insets.bottom, 8);
   const totalHeight = tabBarHeight + bottomPadding;
 
   return (
