@@ -41,3 +41,4 @@ app/(tabs)/sandbox.tsx
 assets/example.json
 
 android/
+ios/
