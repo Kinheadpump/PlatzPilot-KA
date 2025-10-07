@@ -39,34 +39,52 @@ KIT SeatFinder API → Python Server → JSON Storage → HTTP API → Mobile Ap
 
 ## 🏃‍♂️ Quick Start
 
-### Option 1: Automated Setup (Recommended)
+### 🖥️ Local Development
+
+#### Option 1: Automated Setup
 ```bash
-# Clone and setup everything automatically
+git clone https://github.com/Kinheadpump/PlatzPilot-KA.git
+cd PlatzPilot-KA
 ./setup_realtime.sh
 ```
 
-### Option 2: Manual Setup
-
-1. **Start the Backend**:
+#### Option 2: Manual Setup
 ```bash
+# 1. Start the Backend
 cd server
 pip install -r requirements.txt
-python start_server.py  # Starts data collection + API server
-```
+python start_server.py
 
-2. **Configure & Start Frontend**:
-```bash
+# 2. Configure & Start Frontend (new terminal)
 cd client
 npm install
-cp .env.example .env.local  # Configure your API URL
+cp .env.example .env.local
 npm start
 ```
 
-3. **Verify Setup**:
+### 🌐 VPS Deployment
+
+#### Quick Deploy to VPS
 ```bash
-# Test the API server
-curl http://localhost:8080/api/health
-curl http://localhost:8080/api/libraries | jq
+# On your VPS
+wget https://raw.githubusercontent.com/Kinheadpump/PlatzPilot-KA/main/deploy_vps.sh
+chmod +x deploy_vps.sh
+./deploy_vps.sh
+```
+
+#### Configure Client for Production
+```bash
+# On your development machine
+cd client
+./configure_api.sh  # Interactive configuration helper
+# OR manually edit .env.local:
+echo "EXPO_PUBLIC_API_URL=https://your-domain.com" > .env.local
+```
+
+#### Update Deployed Server
+```bash
+# On your VPS
+./update_vps.sh  # Pull updates and restart service
 ```
 
 ---

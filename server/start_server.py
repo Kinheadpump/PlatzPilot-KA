@@ -24,13 +24,13 @@ def run_data_collector():
     except Exception as e:
         print(f"❌ Data collection service error: {e}")
 
-def run_api_server():
+def run_api_server(host='0.0.0.0', port=8080):
     """Run the API server."""
-    print("🌐 Starting API server...")
+    print(f"🌐 Starting API server on {host}:{port}...")
     try:
         # Import and run the API server
         from api_server import run_server
-        run_server(host='0.0.0.0', port=8080)
+        run_server(host=host, port=port)
     except KeyboardInterrupt:
         print("🛑 API server stopped")
     except Exception as e:
@@ -43,6 +43,16 @@ def signal_handler(signum, frame):
 
 def main():
     """Main launcher function."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='PlatzPilot Server Launcher')
+    parser.add_argument('--host', default='0.0.0.0', help='Host to bind API server to (default: 0.0.0.0)')
+    parser.add_argument('--port', type=int, default=8080, help='Port to bind API server to (default: 8080)')
+    parser.add_argument('--data-only', action='store_true', help='Run only data collection service')
+    parser.add_argument('--api-only', action='store_true', help='Run only API server')
+    
+    args = parser.parse_args()
+    
     print("🚀 Starting PlatzPilot Server")
     print("=" * 50)
     
@@ -55,33 +65,49 @@ def main():
         print("❌ Error: config.json not found. Please run from the server directory.")
         sys.exit(1)
     
-    # Create threads for both services
-    data_thread = threading.Thread(target=run_data_collector, name="DataCollector", daemon=True)
-    api_thread = threading.Thread(target=run_api_server, name="APIServer", daemon=True)
+    # Create threads for services
+    data_thread = None
+    api_thread = None
+    
+    if not args.api_only:
+        data_thread = threading.Thread(target=run_data_collector, name="DataCollector", daemon=True)
+    
+    if not args.data_only:
+        api_thread = threading.Thread(target=lambda: run_api_server(args.host, args.port), name="APIServer", daemon=True)
     
     try:
-        # Start both services
-        data_thread.start()
-        time.sleep(2)  # Give data collector a head start
-        api_thread.start()
+        # Start services
+        services_started = []
         
-        print("✅ Both services started successfully!")
-        print("📡 Data collection: Running in background")
-        print("🌐 API server: http://localhost:8080")
-        print("🔍 Health check: http://localhost:8080/api/health")
-        print("📋 Library data: http://localhost:8080/api/libraries")
+        if data_thread:
+            data_thread.start()
+            services_started.append("📡 Data collection")
+            time.sleep(2)  # Give data collector a head start
+        
+        if api_thread:
+            api_thread.start()
+            services_started.append(f"🌐 API server: http://{args.host}:{args.port}")
+        
+        print("✅ Services started successfully!")
+        for service in services_started:
+            print(f"   {service}")
+        
+        if api_thread:
+            print(f"🔍 Health check: http://{args.host}:{args.port}/api/health")
+            print(f"📋 Library data: http://{args.host}:{args.port}/api/libraries")
+        
         print("\nPress Ctrl+C to stop all services")
         
         # Keep main thread alive
         while True:
-            if not data_thread.is_alive():
+            if data_thread and not data_thread.is_alive():
                 print("⚠️ Data collection thread died, restarting...")
                 data_thread = threading.Thread(target=run_data_collector, name="DataCollector", daemon=True)
                 data_thread.start()
             
-            if not api_thread.is_alive():
+            if api_thread and not api_thread.is_alive():
                 print("⚠️ API server thread died, restarting...")
-                api_thread = threading.Thread(target=run_api_server, name="APIServer", daemon=True)
+                api_thread = threading.Thread(target=lambda: run_api_server(args.host, args.port), name="APIServer", daemon=True)
                 api_thread.start()
             
             time.sleep(10)  # Check every 10 seconds
