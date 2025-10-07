@@ -1,6 +1,6 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, Platform } from 'react-native';
-import { router } from 'expo-router';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FlatList, StyleSheet, Text, View, Platform, RefreshControl, ActivityIndicator } from 'react-native';
+import { router, useFocusEffect } from 'expo-router';
 import CategorySelector from '../../components/CategorySelector';
 import LibraryCard from '../../components/LibraryCard';
 import { Library, LibraryCategory } from '../../types/library';
@@ -13,33 +13,110 @@ export default function Index() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [selectedCategory, setSelectedCategory] = useState<LibraryCategory>('ALL');
+  const [currentLibraries, setCurrentLibraries] = useState<Library[]>([]);
+  const [categoryCounts, setCategoryCounts] = useState<Record<LibraryCategory, number>>({} as Record<LibraryCategory, number>);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Calculate bottom padding based on platform and safe area
   const tabBarHeight = Platform.OS === 'ios' ? 50 : 60;
   const bottomPadding = Platform.OS === 'ios' ? insets.bottom : 8;
   const totalTabBarHeight = tabBarHeight + bottomPadding;
 
-  // Initialize FavoritesService when component mounts
+  // Initialize services and load initial data
   useEffect(() => {
-    FavoritesService.initialize();
+    initializeServices();
   }, []);
 
-  const handleLibraryPress = (library: Library) => {
-    // Find the index of this library in the all libraries array
-    const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
-    const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
-    console.log('Navigating to library:', library.long_name);
-    console.log('Library index:', libraryIndex);
-    router.push(`/library/${libraryIndex}` as any);
+  // Load libraries when category changes
+  useEffect(() => {
+    loadLibrariesForCategory();
+  }, [selectedCategory]);
+
+  // Refresh data when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      refreshData();
+    }, [])
+  );
+
+  const initializeServices = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Initialize both services
+      await Promise.all([
+        LibraryDataService.initialize(),
+        FavoritesService.initialize()
+      ]);
+
+      // Load initial data
+      await loadCategoryCounts();
+      await loadLibrariesForCategory();
+
+      console.log('✅ Services initialized successfully');
+    } catch (err) {
+      console.error('❌ Failed to initialize services:', err);
+      setError('Failed to load library data. Please check your internet connection and try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Get category counts using service
-  const categoryCounts = useMemo(() => {
-    return LibraryDataService.getCategoryCounts();
-  }, []);
+  const loadCategoryCounts = async () => {
+    try {
+      const counts = await LibraryDataService.getCategoryCounts();
+      setCategoryCounts(counts);
+    } catch (err) {
+      console.error('Failed to load category counts:', err);
+    }
+  };
 
-  // Get current libraries using service
-  const currentLibraries = LibraryDataService.getLibrariesByCategory(selectedCategory);
+  const loadLibrariesForCategory = async () => {
+    try {
+      const libraries = await LibraryDataService.getLibrariesByCategory(selectedCategory);
+      setCurrentLibraries(libraries);
+    } catch (err) {
+      console.error('Failed to load libraries for category:', selectedCategory, err);
+      setCurrentLibraries([]);
+    }
+  };
+
+  const refreshData = async () => {
+    try {
+      setIsRefreshing(true);
+      setError(null);
+
+      // Refresh data from server
+      await LibraryDataService.refreshData();
+      
+      // Reload category counts and current libraries
+      await loadCategoryCounts();
+      await loadLibrariesForCategory();
+
+      console.log('✅ Data refreshed successfully');
+    } catch (err) {
+      console.error('❌ Failed to refresh data:', err);
+      setError('Failed to refresh data. Please try again.');
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  const handleLibraryPress = async (library: Library) => {
+    try {
+      // Find the index of this library in the all libraries array
+      const allLibraries = await LibraryDataService.getLibrariesByCategory('ALL');
+      const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
+      console.log('Navigating to library:', library.long_name);
+      console.log('Library index:', libraryIndex);
+      router.push(`/library/${libraryIndex}` as any);
+    } catch (err) {
+      console.error('Failed to navigate to library:', err);
+    }
+  };
 
   const styles = StyleSheet.create({
     contentContainer: {
@@ -62,6 +139,23 @@ export default function Index() {
     emptyText: {
       fontSize: 16,
       textAlign: 'center',
+      marginBottom: 10,
+    },
+    errorText: {
+      fontSize: 14,
+      textAlign: 'center',
+      color: colors.error,
+      paddingHorizontal: 20,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontSize: 16,
+      color: colors.textSecondary,
+      marginTop: 10,
     }
   });
 
@@ -71,6 +165,17 @@ export default function Index() {
       onPress={() => handleLibraryPress(item)}
     />
   );
+
+  if (isLoading) {
+    return (
+      <View style={styles.contentContainer}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Lade Bibliotheksdaten...</Text>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.contentContainer}>
@@ -89,11 +194,30 @@ export default function Index() {
         style={styles.libraryList}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={refreshData}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+          />
+        }
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-              Keine Bibliotheken in dieser Kategorie gefunden
-            </Text>
+            {error ? (
+              <>
+                <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+                  Fehler beim Laden der Daten
+                </Text>
+                <Text style={styles.errorText}>
+                  {error}
+                </Text>
+              </>
+            ) : (
+              <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+                Keine Bibliotheken in dieser Kategorie gefunden
+              </Text>
+            )}
           </View>
         }
       />

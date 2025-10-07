@@ -41,13 +41,17 @@ export default function Favorites() {
     }
   };
 
-  const handleLibraryPress = (library: Library) => {
-    // Find the index of this library in the all libraries array
-    const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
-    const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
-    console.log('Navigating to library:', library.long_name);
-    console.log('Library index:', libraryIndex);
-    router.push(`/library/${libraryIndex}` as any);
+  const handleLibraryPress = async (library: Library) => {
+    try {
+      // Find the index of this library in the all libraries array
+      const allLibraries = await LibraryDataService.getLibrariesByCategory('ALL');
+      const libraryIndex = allLibraries.findIndex(lib => lib.long_name === library.long_name);
+      console.log('Navigating to library:', library.long_name);
+      console.log('Library index:', libraryIndex);
+      router.push(`/library/${libraryIndex}` as any);
+    } catch (err) {
+      console.error('Failed to navigate to library:', err);
+    }
   };
 
   // Load favorites when the screen comes into focus

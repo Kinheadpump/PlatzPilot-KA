@@ -1,8 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useTheme } from '../../contexts/ThemeContext';
 import { LibraryDataService } from '../../services/LibraryDataService';
+import { Library } from '../../types/library';
 import LibraryStatusBadge from '../../components/LibraryStatusBadge';
 import CurrentAvailability from '../../components/CurrentAvailability';
 import PredictionsChart from '../../components/PredictionsChart';
@@ -13,12 +14,35 @@ import AdditionalInfo from '../../components/AdditionalInfo';
 export default function LibraryDetail() {
   const { colors } = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [library, setLibrary] = useState<Library | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
-  const allLibraries = LibraryDataService.getLibrariesByCategory('ALL');
-  
-  // Find the library by its index
-  const libraryIndex = parseInt(id || '0', 10);
-  const library = allLibraries[libraryIndex];
+  useEffect(() => {
+    loadLibrary();
+  }, [id]);
+
+  const loadLibrary = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const allLibraries = await LibraryDataService.getLibrariesByCategory('ALL');
+      const libraryIndex = parseInt(id || '0', 10);
+      const foundLibrary = allLibraries[libraryIndex];
+
+      if (foundLibrary) {
+        setLibrary(foundLibrary);
+      } else {
+        setError('Library not found');
+      }
+    } catch (err) {
+      console.error('Failed to load library:', err);
+      setError('Failed to load library data');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -35,18 +59,48 @@ export default function LibraryDetail() {
       marginBottom: 20,
       textAlign: 'center',
     },
-    notFound: {
-      fontSize: 18,
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontSize: 16,
       color: colors.textSecondary,
+      marginTop: 10,
+    },
+    errorContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+    },
+    errorText: {
+      fontSize: 18,
+      color: colors.error,
       textAlign: 'center',
-      marginTop: 50,
     },
   });
 
-  if (!library) {
+  if (isLoading) {
     return (
       <View style={styles.container}>
-        <Text style={styles.notFound}>Library not found</Text>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Lade Bibliotheksdaten...</Text>
+        </View>
+      </View>
+    );
+  }
+
+  if (error || !library) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>
+            {error || 'Library not found'}
+          </Text>
+        </View>
       </View>
     );
   }
